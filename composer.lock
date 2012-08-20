@@ -1,5 +1,5 @@
 {
-    "hash": "d7b60eb8001dd9d0e84fc9dd58392aaf",
+    "hash": "459af3187ec0dabd9463b97398de3b2a",
     "packages": [
         {
             "package": "doctrine/common",
@@ -130,6 +130,12 @@
             "commit-date": "1343980150"
         },
         {
+            "package": "simplethings/entity-audit-bundle",
+            "version": "dev-master",
+            "source-reference": "60a5bcb61a43fc4360ff5190cb4b5e63864fc3b7",
+            "commit-date": "1343892178"
+        },
+        {
             "package": "sonata-project/admin-bundle",
             "version": "dev-master",
             "source-reference": "07e013ec1b00bfaac58663c6e5f3abc46cf1aa36",
@@ -242,6 +248,7 @@
         "sensio/generator-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
         "sonata-project/admin-bundle": 20,
-        "sonata-project/doctrine-orm-admin-bundle": 20
+        "sonata-project/doctrine-orm-admin-bundle": 20,
+        "simplethings/entity-audit-bundle": 20
     }
 }
