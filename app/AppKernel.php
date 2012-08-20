@@ -20,10 +20,13 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),
+            new Sonata\CacheBundle\SonataCacheBundle(),
+            new Sonata\jQueryBundle\SonatajQueryBundle(),
+            new Sonata\AdminBundle\SonataAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-            $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
