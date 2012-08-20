@@ -29,8 +29,21 @@ class Section
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-
-
+    
+    /**
+     * @var array $members
+     * 
+     * @ORM\ManyToMany(targetEntity="Member", mappedBy="sections")
+     */ 
+    private $members;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -62,5 +75,38 @@ class Section
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Add members
+     *
+     * @param Dvp\TeamBundle\Entity\Member $members
+     * @return Section
+     */
+    public function addMember(\Dvp\TeamBundle\Entity\Member $members)
+    {
+        $this->members[] = $members;
+    
+        return $this;
+    }
+
+    /**
+     * Remove members
+     *
+     * @param Dvp\TeamBundle\Entity\Member $members
+     */
+    public function removeMember(\Dvp\TeamBundle\Entity\Member $members)
+    {
+        $this->members->removeElement($members);
+    }
+
+    /**
+     * Get members
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMembers()
+    {
+        return $this->members;
     }
 }

@@ -33,11 +33,25 @@ class Role
     /**
      * @var boolean $userAddable
      *
-     * @ORM\Column(name="userAddable", type="boolean")
+     * @ORM\Column(name="user_addable", type="boolean")
      */
     private $userAddable;
-
-
+    
+    /**
+     * @var array $members
+     * 
+     * @ORM\ManyToMany(targetEntity="Member", mappedBy="roles")
+     */ 
+    private $members;
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -89,8 +103,51 @@ class Role
      *
      * @return boolean 
      */
-    public function getUserAddable()
+    private function getUserAddable()
     {
         return $this->userAddable;
+    }
+
+    /**
+     * Get userAddable
+     *
+     * @return boolean 
+     */
+    public function isUserAddable()
+    {
+        return $this->getUserAddable();
+    }
+
+    /**
+     * Add members
+     *
+     * @param Dvp\TeamBundle\Entity\Member $members
+     * @return Role
+     */
+    public function addMember(\Dvp\TeamBundle\Entity\Member $members)
+    {
+        $this->members[] = $members;
+    
+        return $this;
+    }
+
+    /**
+     * Remove members
+     *
+     * @param Dvp\TeamBundle\Entity\Member $members
+     */
+    public function removeMember(\Dvp\TeamBundle\Entity\Member $members)
+    {
+        $this->members->removeElement($members);
+    }
+
+    /**
+     * Get members
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMembers()
+    {
+        return $this->members;
     }
 }

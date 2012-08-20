@@ -26,14 +26,14 @@ class Member
     /**
      * @var string $familyName
      *
-     * @ORM\Column(name="familyName", type="string", length=255, nullable=true)
+     * @ORM\Column(name="family_name", type="string", length=255, nullable=true)
      */
     private $familyName;
 
     /**
      * @var string $givenName
      *
-     * @ORM\Column(name="givenName", type="string", length=255, nullable=true)
+     * @ORM\Column(name="given_name", type="string", length=255, nullable=true)
      */
     private $givenName;
 
@@ -47,7 +47,7 @@ class Member
     /**
      * @var integer $forumId
      *
-     * @ORM\Column(name="forumId", type="integer", unique=true)
+     * @ORM\Column(name="forum_id", type="integer", unique=true)
      */
     private $forumId;
 
@@ -68,7 +68,7 @@ class Member
     /**
      * @var array $certifications
      *
-     * @ORM\ManyToMany(targetEntity="Certification")
+     * @ORM\ManyToMany(targetEntity="Certification", inversedBy="members")
      * @ORM\JoinTable(name="sf2_team_member_certification")
      */
     private $certifications;
@@ -76,7 +76,7 @@ class Member
     /**
      * @var array $roles
      *
-     * @ORM\ManyToMany(targetEntity="Role")
+     * @ORM\ManyToMany(targetEntity="Role", inversedBy="members")
      * @ORM\JoinTable(name="sf2_team_member_role")
      */
     private $roles;
@@ -90,21 +90,35 @@ class Member
     private $category;
     
     /**
+     * @var array $sections
+     *
+     * @ORM\ManyToMany(targetEntity="Section")
+     * @ORM\JoinTable(name="sf2_team_member_section")
+     */
+    private $sections;
+    
+    /**
      * @var array $websites
      *
-     * @ORM\OneToMany(targetEntity="Website", mappedBy="member")
+     * @ORM\ManyToMany(targetEntity="Website", inversedBy="members")
+     * @ORM\JoinTable(name="sf2_team_member_website",
+     *      joinColumns={@ORM\JoinColumn(name="member_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="website_id", referencedColumnName="id", unique=true)}
+     *      )
      */
     private $websites;
     
     /**
-     * @var array $sections
-     *
-     * @ORM\OneToMany(targetEntity="Section")
-     * @ORM\Column(nullable=false)
+     * Constructor
      */
-    private $sections;
-
-
+    public function __construct()
+    {
+        $this->certifications = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->sections = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->websites = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -118,7 +132,7 @@ class Member
     /**
      * Set familyName
      *
-     * @param string $family name
+     * @param string $familyName
      * @return Member
      */
     public function setFamilyName($familyName)
@@ -129,7 +143,7 @@ class Member
     }
 
     /**
-     * Get family name
+     * Get familyName
      *
      * @return string 
      */
@@ -139,7 +153,7 @@ class Member
     }
 
     /**
-     * Set given name
+     * Set givenName
      *
      * @param string $givenName
      * @return Member
@@ -152,7 +166,7 @@ class Member
     }
 
     /**
-     * Get given name
+     * Get givenName
      *
      * @return string 
      */
@@ -183,12 +197,12 @@ class Member
     {
         return $this->pseudonym;
     }
-    
+
     /**
-     * Set forum id
+     * Set forumId
      *
      * @param integer $forumId
-     * @return integer 
+     * @return Member
      */
     public function setForumId($forumId)
     {
@@ -196,9 +210,9 @@ class Member
     
         return $this;
     }
-    
+
     /**
-     * Get forum id
+     * Get forumId
      *
      * @return integer 
      */
@@ -252,14 +266,6 @@ class Member
     {
         return $this->showEmail;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->certifications = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->category = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add certifications
@@ -295,6 +301,39 @@ class Member
     }
 
     /**
+     * Add roles
+     *
+     * @param Dvp\TeamBundle\Entity\Role $roles
+     * @return Member
+     */
+    public function addRole(\Dvp\TeamBundle\Entity\Role $roles)
+    {
+        $this->roles[] = $roles;
+    
+        return $this;
+    }
+
+    /**
+     * Remove roles
+     *
+     * @param Dvp\TeamBundle\Entity\Role $roles
+     */
+    public function removeRole(\Dvp\TeamBundle\Entity\Role $roles)
+    {
+        $this->roles->removeElement($roles);
+    }
+
+    /**
+     * Get roles
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
      * Set category
      *
      * @param Dvp\TeamBundle\Entity\Category $category
@@ -318,22 +357,32 @@ class Member
     }
 
     /**
-     * Set sections
+     * Add sections
      *
-     * @param string $sections
+     * @param Dvp\TeamBundle\Entity\Section $sections
      * @return Member
      */
-    public function setSections($sections)
+    public function addSection(\Dvp\TeamBundle\Entity\Section $sections)
     {
-        $this->sections = $sections;
+        $this->sections[] = $sections;
     
         return $this;
     }
 
     /**
+     * Remove sections
+     *
+     * @param Dvp\TeamBundle\Entity\Section $sections
+     */
+    public function removeSection(\Dvp\TeamBundle\Entity\Section $sections)
+    {
+        $this->sections->removeElement($sections);
+    }
+
+    /**
      * Get sections
      *
-     * @return string 
+     * @return Doctrine\Common\Collections\Collection 
      */
     public function getSections()
     {
@@ -371,38 +420,5 @@ class Member
     public function getWebsites()
     {
         return $this->websites;
-    }
-
-    /**
-     * Add roles
-     *
-     * @param Dvp\TeamBundle\Entity\Role $roles
-     * @return Member
-     */
-    public function addRole(\Dvp\TeamBundle\Entity\Role $roles)
-    {
-        $this->roles[] = $roles;
-    
-        return $this;
-    }
-
-    /**
-     * Remove roles
-     *
-     * @param Dvp\TeamBundle\Entity\Role $roles
-     */
-    public function removeRole(\Dvp\TeamBundle\Entity\Role $roles)
-    {
-        $this->roles->removeElement($roles);
-    }
-
-    /**
-     * Get roles
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getRoles()
-    {
-        return $this->roles;
     }
 }

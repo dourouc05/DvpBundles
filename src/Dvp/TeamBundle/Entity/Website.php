@@ -38,14 +38,6 @@ class Website
     private $url;
 
     /**
-     * @var Member $member
-     *
-     * @ORM\ManyToOne(targetEntity="Member", inversedBy="website")
-     */
-    private $member;
-
-
-    /**
      * Get id
      *
      * @return integer 
@@ -99,28 +91,5 @@ class Website
     public function getUrl()
     {
         return $this->url;
-    }
-
-    /**
-     * Set member
-     *
-     * @param Dvp\TeamBundle\Entity\Member $member
-     * @return Website
-     */
-    public function setMember(\Dvp\TeamBundle\Entity\Member $member = null)
-    {
-        $this->member = $member;
-    
-        return $this;
-    }
-
-    /**
-     * Get member
-     *
-     * @return Dvp\TeamBundle\Entity\Member 
-     */
-    public function getMember()
-    {
-        return $this->member;
     }
 }

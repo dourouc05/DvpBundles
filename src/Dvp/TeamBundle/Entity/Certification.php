@@ -36,7 +36,13 @@ class Certification
      * @ORM\Column(name="image_url", type="string", length=255)
      */
     private $imageUrl;
-
+    
+    /**
+     * @var array $members
+     * 
+     * @ORM\ManyToMany(targetEntity="Member", mappedBy="certifications")
+     */ 
+    private $members;
 
     /**
      * Get id
@@ -72,7 +78,7 @@ class Certification
     }
 
     /**
-     * Set image_url
+     * Set imageUrl
      *
      * @param string $imageUrl
      * @return Certification
@@ -85,12 +91,52 @@ class Certification
     }
 
     /**
-     * Get image_url
+     * Get imageUrl
      *
      * @return string 
      */
     public function getImageUrl()
     {
         return $this->imageUrl;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add members
+     *
+     * @param Dvp\TeamBundle\Entity\Member $members
+     * @return Certification
+     */
+    public function addMember(\Dvp\TeamBundle\Entity\Member $members)
+    {
+        $this->members[] = $members;
+    
+        return $this;
+    }
+
+    /**
+     * Remove members
+     *
+     * @param Dvp\TeamBundle\Entity\Member $members
+     */
+    public function removeMember(\Dvp\TeamBundle\Entity\Member $members)
+    {
+        $this->members->removeElement($members);
+    }
+
+    /**
+     * Get members
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMembers()
+    {
+        return $this->members;
     }
 }
