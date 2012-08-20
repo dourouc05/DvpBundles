@@ -1,0 +1,7 @@
+parameters:
+#    dvp_team.example.class: Dvp\TeamBundle\Example
+
+services:
+#    dvp_team.example:
+#        class: %dvp_team.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
