@@ -7,25 +7,35 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Validator\ErrorElement;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class MemberAdmin extends Admin 
 {
     protected $baseRouteName = 'dvp_admin_team_member';
     protected $baseRoutePattern = 'team/member';
+    
+    // public function getClass() {
+        // return 'Dvp\\TeamBundle\\Entity\\Member';
+    // }
+    
+    protected function configureShowFields(ShowMapper $filter)
+    {
+        $filter
+            ->add('familyName', 'text')
+        ;
+    }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name')
-            ->add('enabled', null, array('required' => false))
+            ->add('familyName', 'text')
         ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name')
-            ->add('posts')
+            ->add('familyName')
         ;
     }
 

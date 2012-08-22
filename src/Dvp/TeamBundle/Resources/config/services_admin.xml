@@ -7,6 +7,7 @@
         <!-- MEMBER -->
         <parameter key="dvp.team.admin.member.class">Dvp\TeamBundle\Admin\MemberAdmin</parameter>
         <parameter key="dvp.team.admin.member.controller">SonataAdminBundle:CRUD</parameter>
+        <parameter key="dvp.team.admin.member.entity">Dvp\TeamBundle\Entity\Member</parameter>
         <parameter key="dvp.team.admin.member.translation_domain">DvpTeamBundle</parameter>
 
         <!-- CATEGORY --><!--
@@ -28,9 +29,13 @@
     <services>
         <service id="dvp.team.admin.member" class="%dvp.team.admin.member.class%">
             <tag name="sonata.admin" manager_type="orm" group="dvp_team" label="posts" label_catalogue="%dvp.team.admin.member.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
-            <argument />
+            
+    <argument />
+    <argument>%dvp.team.admin.member.entity%</argument>
+    <argument>%dvp.team.admin.member.controller%</argument>
+            <!--<argument />
             <argument>%dvp.team.admin.member.class%</argument>
-            <argument>%dvp.team.admin.member.controller%</argument>
+            <argument>%dvp.team.admin.member.controller%</argument>-->
 <!--
             <call method="setUserManager">
                 <argument type="service" id="fos_user.user_manager" />

@@ -61,17 +61,17 @@ swiftmailer:
 
  
 sonata_block:
-    default_contexts: [cms]
+    default_contexts: [admin]
     blocks:
         sonata.admin.block.admin_list:
-            contexts:   [admin]
+            # contexts:   [admin]
 
         sonata.block.service.text:
         sonata.block.service.action:
         sonata.block.service.rss:
 
 sonata_admin:
-    title:      Sonata Project
+    title:      Administration
     title_logo: /bundles/sonataadmin/logo_title.png
     templates:
         # default global templates
@@ -87,5 +87,5 @@ sonata_admin:
             # display a dashboard block
             - { position: left, type: sonata.admin.block.admin_list }
 
-        groups:
-            default: ~
+        # groups:
+            # default: ~
