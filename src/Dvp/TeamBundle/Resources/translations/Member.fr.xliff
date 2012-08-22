@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="" >
+        <body>
+            <trans-unit id="form.label_family_name">
+                <source>form.label_family_name</source>
+                <target>Nom de famille</target>
+            </trans-unit>
+            <trans-unit id="posts">
+                <source>posts</source>
+                <target>Membre</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_member_list">
+                <source>breadcrumb.link_member_list</source>
+                <target>Liste des membres</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_member_create">
+                <source>breadcrumb.link_member_create</source>
+                <target>Créer un membre</target>
+            </trans-unit>
+            <trans-unit id="list.label_pseudonym">
+                <source>list.label_pseudonym</source>
+                <target>Pseudonyme</target>
+            </trans-unit>
+            <trans-unit id="list.label_family_name">
+                <source>list.label_family_name</source>
+                <target>Nom de famille</target>
+            </trans-unit>
+            <trans-unit id="list.label_given_name">
+                <source>list.label_given_name</source>
+                <target>Prénom</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -8,31 +8,16 @@
         <parameter key="dvp.team.admin.member.class">Dvp\TeamBundle\Admin\MemberAdmin</parameter>
         <parameter key="dvp.team.admin.member.controller">SonataAdminBundle:CRUD</parameter>
         <parameter key="dvp.team.admin.member.entity">Dvp\TeamBundle\Entity\Member</parameter>
-        <parameter key="dvp.team.admin.member.translation_domain">DvpTeamBundle</parameter>
-
-        <!-- CATEGORY --><!--
-        <parameter key="sonata.news.admin.category.class">Sonata\NewsBundle\Admin\CategoryAdmin</parameter>
-        <parameter key="sonata.news.admin.category.controller">SonataAdminBundle:CRUD</parameter>
-        <parameter key="sonata.news.admin.category.translation_domain">%sonata.news.admin.post.translation_domain%</parameter>-->
-
-        <!-- COMMENT --><!--
-        <parameter key="sonata.news.admin.comment.class">Sonata\NewsBundle\Admin\CommentAdmin</parameter>
-        <parameter key="sonata.news.admin.comment.controller">SonataAdminBundle:CRUD</parameter>
-        <parameter key="sonata.news.admin.comment.translation_domain">%sonata.news.admin.post.translation_domain%</parameter>-->
-
-        <!-- TAG --><!--
-        <parameter key="sonata.news.admin.tag.class">Sonata\NewsBundle\Admin\TagAdmin</parameter>
-        <parameter key="sonata.news.admin.tag.controller">SonataAdminBundle:CRUD</parameter>
-        <parameter key="sonata.news.admin.tag.translation_domain">%sonata.news.admin.post.translation_domain%</parameter>-->
+        <parameter key="dvp.team.admin.member.translation_domain">Member</parameter>
     </parameters>
 
     <services>
         <service id="dvp.team.admin.member" class="%dvp.team.admin.member.class%">
             <tag name="sonata.admin" manager_type="orm" group="dvp_team" label="posts" label_catalogue="%dvp.team.admin.member.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
             
-    <argument />
-    <argument>%dvp.team.admin.member.entity%</argument>
-    <argument>%dvp.team.admin.member.controller%</argument>
+            <argument />
+            <argument>%dvp.team.admin.member.entity%</argument>
+            <argument>%dvp.team.admin.member.controller%</argument>
             <!--<argument />
             <argument>%dvp.team.admin.member.class%</argument>
             <argument>%dvp.team.admin.member.controller%</argument>-->
@@ -53,45 +38,6 @@
                 <argument>%dvp.team.admin.member.translation_domain%</argument>
             </call>
         </service>
-<!--
-        <service id="sonata.news.admin.comment" class="%sonata.news.admin.comment.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_blog" label="comments" label_catalogue="%sonata.news.admin.comment.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
-            <argument />
-            <argument>%sonata.news.admin.comment.entity%</argument>
-            <argument>%sonata.news.admin.comment.controller%</argument>
-
-            <call method="setTranslationDomain">
-                <argument>%sonata.news.admin.comment.translation_domain%</argument>
-            </call>
-
-            <call method="setCommentManager">
-                <argument id="sonata.news.manager.comment" type="service"/>
-            </call>
-
-        </service>
-
-        <service id="sonata.news.admin.category" class="%sonata.news.admin.category.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_blog" label="categories"  label_catalogue="%sonata.news.admin.category.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
-            <argument />
-            <argument>%sonata.news.admin.category.entity%</argument>
-            <argument>%sonata.news.admin.category.controller%</argument>
-
-            <call method="setTranslationDomain">
-                <argument>%sonata.news.admin.category.translation_domain%</argument>
-            </call>
-        </service>
-
-        <service id="sonata.news.admin.tag" class="%sonata.news.admin.tag.class%">
-            <tag name="sonata.admin" manager_type="orm" group="sonata_blog" label="tags"  label_catalogue="%sonata.news.admin.news.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
-            <argument />
-            <argument>%sonata.news.admin.tag.entity%</argument>
-            <argument>%sonata.news.admin.tag.controller%</argument>
-
-            <call method="setTranslationDomain">
-                <argument>%sonata.news.admin.tag.translation_domain%</argument>
-            </call>
-        </service>
--->
     </services>
 
 </container>

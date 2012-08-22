@@ -21,14 +21,14 @@ class MemberAdmin extends Admin
     protected function configureShowFields(ShowMapper $filter)
     {
         $filter
-            ->add('familyName', 'text')
+            ->add('familyName')
         ;
     }
 
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('familyName', 'text')
+            ->add('familyName')
         ;
     }
 
@@ -42,9 +42,9 @@ class MemberAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name')
-            ->add('slug')
-            ->add('enabled')
+            ->addIdentifier('pseudonym')
+            ->add('familyName')
+            ->add('givenName')
         ;
     }
 }
