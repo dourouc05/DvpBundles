@@ -154,6 +154,50 @@
                 <source>show.label_websites</source>
                 <target>Sites Web</target>
             </trans-unit>
+            <trans-unit id="filter.label_pseudonym">
+                <source>filter.label_pseudonym</source>
+                <target>Pseudonyme</target>
+            </trans-unit>
+            <trans-unit id="filter.label_family_name">
+                <source>filter.label_family_name</source>
+                <target>Nom de famille</target>
+            </trans-unit>
+            <trans-unit id="filter.label_given_name">
+                <source>filter.label_given_name</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="filter.label_forum_id">
+                <source>filter.label_forum_id</source>
+                <target>Numéro d'utilisateur</target>
+            </trans-unit>
+            <trans-unit id="filter.label_email">
+                <source>filter.label_email</source>
+                <target>Adresse email</target>
+            </trans-unit>
+            <trans-unit id="filter.label_filter_email">
+                <source>filter.label_filter_email</source>
+                <target>Montrer l'adresse email ?</target>
+            </trans-unit>
+            <trans-unit id="filter.label_certifications">
+                <source>filter.label_certifications</source>
+                <target>Certifications</target>
+            </trans-unit>
+            <trans-unit id="filter.label_roles">
+                <source>filter.label_roles</source>
+                <target>Rôles</target>
+            </trans-unit>
+            <trans-unit id="filter.label_category">
+                <source>filter.label_category</source>
+                <target>Catégorie</target>
+            </trans-unit>
+            <trans-unit id="filter.label_sections">
+                <source>filter.label_sections</source>
+                <target>Rubriques</target>
+            </trans-unit>
+            <trans-unit id="filter.label_websites">
+                <source>filter.label_websites</source>
+                <target>Sites Web</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
