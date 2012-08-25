@@ -12,11 +12,19 @@
             </trans-unit>
             <trans-unit id="breadcrumb.link_member_list">
                 <source>breadcrumb.link_member_list</source>
-                <target>Liste des membres</target>
+                <target>Membres</target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_member_create">
                 <source>breadcrumb.link_member_create</source>
-                <target>Créer un membre</target>
+                <target>Créer</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_member_edit">
+                <source>breadcrumb.link_member_edit</source>
+                <target>Éditer</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_member_show">
+                <source>breadcrumb.link_member_show</source>
+                <target>Afficher</target>
             </trans-unit>
             <trans-unit id="list.label_pseudonym">
                 <source>list.label_pseudonym</source>
@@ -28,6 +36,18 @@
             </trans-unit>
             <trans-unit id="list.label_given_name">
                 <source>list.label_given_name</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="show.label_pseudonym">
+                <source>show.label_pseudonym</source>
+                <target>Pseudonyme</target>
+            </trans-unit>
+            <trans-unit id="show.label_family_name">
+                <source>show.label_family_name</source>
+                <target>Nom de famille</target>
+            </trans-unit>
+            <trans-unit id="show.label_given_name">
+                <source>show.label_given_name</source>
                 <target>Prénom</target>
             </trans-unit>
         </body>
