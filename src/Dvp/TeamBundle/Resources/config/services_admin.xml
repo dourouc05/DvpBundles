@@ -14,6 +14,11 @@
         <parameter key="dvp.team.admin.certification.controller">SonataAdminBundle:CRUD</parameter>
         <parameter key="dvp.team.admin.certification.entity">Dvp\TeamBundle\Entity\Certification</parameter>
         <parameter key="dvp.team.admin.certification.translation_domain">Certification</parameter>
+        <!-- ROLE -->
+        <parameter key="dvp.team.admin.role.class">Dvp\TeamBundle\Admin\RoleAdmin</parameter>
+        <parameter key="dvp.team.admin.role.controller">SonataAdminBundle:CRUD</parameter>
+        <parameter key="dvp.team.admin.role.entity">Dvp\TeamBundle\Entity\Role</parameter>
+        <parameter key="dvp.team.admin.role.translation_domain">Role</parameter>
     </parameters>
 
     <services>
@@ -52,6 +57,17 @@
 
             <call method="setTranslationDomain">
                 <argument>%dvp.team.admin.certification.translation_domain%</argument>
+            </call>
+        </service>
+        <service id="dvp.team.admin.role" class="%dvp.team.admin.role.class%">
+            <tag name="sonata.admin" manager_type="orm" group="dvp_team" label="posts" label_catalogue="%dvp.team.admin.role.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
+            
+            <argument />
+            <argument>%dvp.team.admin.role.entity%</argument>
+            <argument>%dvp.team.admin.role.controller%</argument>
+
+            <call method="setTranslationDomain">
+                <argument>%dvp.team.admin.role.translation_domain%</argument>
             </call>
         </service>
     </services>

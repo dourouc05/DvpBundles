@@ -107,7 +107,7 @@ class Role
      *
      * @return boolean 
      */
-    private function getUserAddable()
+    public function getUserAddable()
     {
         return $this->userAddable;
     }

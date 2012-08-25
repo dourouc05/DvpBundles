@@ -4,55 +4,55 @@
         <body>
             <trans-unit id="posts">
                 <source>posts</source>
-                <target>Certification</target>
+                <target>Rôles</target>
             </trans-unit>
-            <trans-unit id="breadcrumb.link_certification_list">
-                <source>breadcrumb.link_certification_list</source>
-                <target>Certifications</target>
+            <trans-unit id="breadcrumb.link_role_list">
+                <source>breadcrumb.link_role_list</source>
+                <target>Rôles</target>
             </trans-unit>
-            <trans-unit id="breadcrumb.link_certification_create">
-                <source>breadcrumb.link_certification_create</source>
+            <trans-unit id="breadcrumb.link_role_create">
+                <source>breadcrumb.link_role_create</source>
                 <target>Créer</target>
             </trans-unit>
-            <trans-unit id="breadcrumb.link_certification_edit">
-                <source>breadcrumb.link_certification_edit</source>
+            <trans-unit id="breadcrumb.link_role_edit">
+                <source>breadcrumb.link_role_edit</source>
                 <target>Éditer</target>
             </trans-unit>
-            <trans-unit id="breadcrumb.link_certification_show">
-                <source>breadcrumb.link_certification_show</source>
+            <trans-unit id="breadcrumb.link_role_show">
+                <source>breadcrumb.link_role_show</source>
                 <target>Afficher</target>
             </trans-unit>
             <trans-unit id="form.label_name">
                 <source>form.label_name</source>
                 <target>Nom</target>
             </trans-unit>
-            <trans-unit id="form.label_image_url">
-                <source>form.label_image_url</source>
-                <target>URL de l'image</target>
+            <trans-unit id="form.label_user_addable">
+                <source>form.label_user_addable</source>
+                <target>Ajoutable par l'utilisateur ? </target>
             </trans-unit>
             <trans-unit id="list.label_name">
                 <source>list.label_name</source>
                 <target>Nom</target>
             </trans-unit>
-            <trans-unit id="list.label_image_url">
-                <source>list.label_image_url</source>
-                <target>URL de l'image</target>
+            <trans-unit id="list.label_user_addable">
+                <source>list.label_user_addable</source>
+                <target>Ajoutable par l'utilisateur ? </target>
             </trans-unit>
             <trans-unit id="show.label_name">
                 <source>show.label_name</source>
                 <target>Nom</target>
             </trans-unit>
-            <trans-unit id="show.label_image_url">
-                <source>show.label_image_url</source>
-                <target>URL de l'image</target>
+            <trans-unit id="show.label_user_addable">
+                <source>show.label_user_addable</source>
+                <target>Ajoutable par l'utilisateur ? </target>
             </trans-unit>
             <trans-unit id="filter.label_name">
                 <source>filter.label_name</source>
                 <target>Nom</target>
             </trans-unit>
-            <trans-unit id="filter.label_image_url">
-                <source>filter.label_image_url</source>
-                <target>URL de l'image</target>
+            <trans-unit id="filter.label_user_addable">
+                <source>filter.label_user_addable</source>
+                <target>Ajoutable par l'utilisateur ? </target>
             </trans-unit>
         </body>
     </file>
