@@ -43,6 +43,10 @@ class Certification
      * @ORM\ManyToMany(targetEntity="Member", mappedBy="certifications")
      */ 
     private $members;
+    
+    public function __toString() {
+        return $this->name;
+    }
 
     /**
      * Get id

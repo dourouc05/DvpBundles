@@ -36,6 +36,10 @@ class Website
      * @ORM\Column(name="url", type="string", length=255)
      */
     private $url;
+    
+    public function __toString() {
+        return $this->name . ' (' . $this->url . ')';
+    }
 
     /**
      * Get id

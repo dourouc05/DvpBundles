@@ -119,6 +119,10 @@ class Member
         $this->websites = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
+    public function __toString() {
+        return $this->pseudonym;
+    }
+    
     /**
      * Get id
      *

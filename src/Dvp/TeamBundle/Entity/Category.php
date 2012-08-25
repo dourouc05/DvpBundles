@@ -36,6 +36,18 @@ class Category
      * @ORM\ManyToMany(targetEntity="Member", mappedBy="category")
      */ 
     private $members;
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    public function __toString() {
+        return $this->name;
+    }
 
     /**
      * Get id
@@ -68,13 +80,6 @@ class Category
     public function getName()
     {
         return $this->name;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
