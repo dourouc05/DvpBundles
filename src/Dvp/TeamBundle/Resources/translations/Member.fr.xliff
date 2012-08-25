@@ -2,10 +2,6 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="" >
         <body>
-            <trans-unit id="form.label_family_name">
-                <source>form.label_family_name</source>
-                <target>Nom de famille</target>
-            </trans-unit>
             <trans-unit id="posts">
                 <source>posts</source>
                 <target>Membre</target>
@@ -26,6 +22,50 @@
                 <source>breadcrumb.link_member_show</source>
                 <target>Afficher</target>
             </trans-unit>
+            <trans-unit id="form.label_pseudonym">
+                <source>form.label_pseudonym</source>
+                <target>Pseudonyme</target>
+            </trans-unit>
+            <trans-unit id="form.label_family_name">
+                <source>form.label_family_name</source>
+                <target>Nom de famille</target>
+            </trans-unit>
+            <trans-unit id="form.label_given_name">
+                <source>form.label_given_name</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="form.label_forum_id">
+                <source>form.label_forum_id</source>
+                <target>Numéro d'utilisateur</target>
+            </trans-unit>
+            <trans-unit id="form.label_email">
+                <source>form.label_email</source>
+                <target>Adresse email</target>
+            </trans-unit>
+            <trans-unit id="form.label_show_email">
+                <source>form.label_show_email</source>
+                <target>Montrer l'adresse email ?</target>
+            </trans-unit>
+            <trans-unit id="form.label_certifications">
+                <source>form.label_certifications</source>
+                <target>Certifications</target>
+            </trans-unit>
+            <trans-unit id="form.label_roles">
+                <source>form.label_roles</source>
+                <target>Rôles</target>
+            </trans-unit>
+            <trans-unit id="form.label_category">
+                <source>form.label_category</source>
+                <target>Catégorie</target>
+            </trans-unit>
+            <trans-unit id="form.label_sections">
+                <source>form.label_sections</source>
+                <target>Rubriques</target>
+            </trans-unit>
+            <trans-unit id="form.label_websites">
+                <source>form.label_websites</source>
+                <target>Sites Web</target>
+            </trans-unit>
             <trans-unit id="list.label_pseudonym">
                 <source>list.label_pseudonym</source>
                 <target>Pseudonyme</target>
@@ -38,6 +78,38 @@
                 <source>list.label_given_name</source>
                 <target>Prénom</target>
             </trans-unit>
+            <trans-unit id="list.label_forum_id">
+                <source>list.label_forum_id</source>
+                <target>Numéro d'utilisateur</target>
+            </trans-unit>
+            <trans-unit id="list.label_email">
+                <source>list.label_email</source>
+                <target>Adresse email</target>
+            </trans-unit>
+            <trans-unit id="list.label_show_email">
+                <source>list.label_show_email</source>
+                <target>Montrer l'adresse email ?</target>
+            </trans-unit>
+            <trans-unit id="list.label_certifications">
+                <source>list.label_certifications</source>
+                <target>Certifications</target>
+            </trans-unit>
+            <trans-unit id="list.label_roles">
+                <source>list.label_roles</source>
+                <target>Rôles</target>
+            </trans-unit>
+            <trans-unit id="list.label_category">
+                <source>list.label_category</source>
+                <target>Catégorie</target>
+            </trans-unit>
+            <trans-unit id="list.label_sections">
+                <source>list.label_sections</source>
+                <target>Rubriques</target>
+            </trans-unit>
+            <trans-unit id="list.label_websites">
+                <source>list.label_websites</source>
+                <target>Sites Web</target>
+            </trans-unit>
             <trans-unit id="show.label_pseudonym">
                 <source>show.label_pseudonym</source>
                 <target>Pseudonyme</target>
@@ -49,6 +121,38 @@
             <trans-unit id="show.label_given_name">
                 <source>show.label_given_name</source>
                 <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="show.label_forum_id">
+                <source>show.label_forum_id</source>
+                <target>Numéro d'utilisateur</target>
+            </trans-unit>
+            <trans-unit id="show.label_email">
+                <source>show.label_email</source>
+                <target>Adresse email</target>
+            </trans-unit>
+            <trans-unit id="show.label_show_email">
+                <source>show.label_show_email</source>
+                <target>Montrer l'adresse email ?</target>
+            </trans-unit>
+            <trans-unit id="show.label_certifications">
+                <source>show.label_certifications</source>
+                <target>Certifications</target>
+            </trans-unit>
+            <trans-unit id="show.label_roles">
+                <source>show.label_roles</source>
+                <target>Rôles</target>
+            </trans-unit>
+            <trans-unit id="show.label_category">
+                <source>show.label_category</source>
+                <target>Catégorie</target>
+            </trans-unit>
+            <trans-unit id="show.label_sections">
+                <source>show.label_sections</source>
+                <target>Rubriques</target>
+            </trans-unit>
+            <trans-unit id="show.label_websites">
+                <source>show.label_websites</source>
+                <target>Sites Web</target>
             </trans-unit>
         </body>
     </file>
