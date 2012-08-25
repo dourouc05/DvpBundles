@@ -11,17 +11,21 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class MemberAdmin extends Admin 
 {
-    protected $baseRouteName = 'dvp_admin_team_member';
-    protected $baseRoutePattern = 'team/member';
-    
-    // public function getClass() {
-        // return 'Dvp\\TeamBundle\\Entity\\Member';
-    // }
-    
+    // Show
     protected function configureShowFields(ShowMapper $filter)
     {
         $filter
+            ->add('pseudonym')
+            ->add('givenName')
             ->add('familyName')
+            ->add('forumId')
+            ->add('email')
+            ->add('showEmail')
+            ->add('certifications')
+            ->add('roles')
+            ->add('category')
+            ->add('sections')
+            ->add('websites')
         ;
     }
 
@@ -29,9 +33,9 @@ class MemberAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->add('pseudonym')
             ->add('givenName')
             ->add('familyName')
-            ->add('pseudonym')
             ->add('forumId')
             ->add('email')
             ->add('showEmail')
@@ -50,12 +54,12 @@ class MemberAdmin extends Admin
         ;
     }
 
+    // List
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->addIdentifier('pseudonym')
-            ->add('familyName')
-            ->add('givenName')
+            ->add('forumId')
         ;
     }
 }
