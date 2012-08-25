@@ -9,6 +9,11 @@
         <parameter key="dvp.team.admin.member.controller">SonataAdminBundle:CRUD</parameter>
         <parameter key="dvp.team.admin.member.entity">Dvp\TeamBundle\Entity\Member</parameter>
         <parameter key="dvp.team.admin.member.translation_domain">Member</parameter>
+        <!-- CERTIFICATION -->
+        <parameter key="dvp.team.admin.certification.class">Dvp\TeamBundle\Admin\CertificationAdmin</parameter>
+        <parameter key="dvp.team.admin.certification.controller">SonataAdminBundle:CRUD</parameter>
+        <parameter key="dvp.team.admin.certification.entity">Dvp\TeamBundle\Entity\Certification</parameter>
+        <parameter key="dvp.team.admin.certification.translation_domain">Certification</parameter>
     </parameters>
 
     <services>
@@ -36,6 +41,17 @@
 
             <call method="setTranslationDomain">
                 <argument>%dvp.team.admin.member.translation_domain%</argument>
+            </call>
+        </service>
+        <service id="dvp.team.admin.certification" class="%dvp.team.admin.certification.class%">
+            <tag name="sonata.admin" manager_type="orm" group="dvp_team" label="posts" label_catalogue="%dvp.team.admin.certification.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
+            
+            <argument />
+            <argument>%dvp.team.admin.certification.entity%</argument>
+            <argument>%dvp.team.admin.certification.controller%</argument>
+
+            <call method="setTranslationDomain">
+                <argument>%dvp.team.admin.certification.translation_domain%</argument>
             </call>
         </service>
     </services>
