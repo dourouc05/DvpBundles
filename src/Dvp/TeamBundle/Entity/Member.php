@@ -26,44 +26,51 @@ class Member
     /**
      * @var string $familyName
      *
-     * @ORM\Column(name="family_name", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $familyName;
 
     /**
      * @var string $givenName
      *
-     * @ORM\Column(name="given_name", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $givenName;
 
     /**
      * @var string $pseudonym
      *
-     * @ORM\Column(name="pseudonym", type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $pseudonym;
 
     /**
      * @var integer $forumId
      *
-     * @ORM\Column(name="forum_id", type="integer", unique=true)
+     * @ORM\Column(type="integer", unique=true)
      */
     private $forumId;
 
     /**
      * @var string $email
      *
-     * @ORM\Column(name="email", type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $email;
 
     /**
      * @var boolean $showEmail
      *
-     * @ORM\Column(name="show_email", type="boolean")
+     * @ORM\Column(type="boolean")
      */
     private $showEmail;
+
+    /**
+     * @var string $photo
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private $photo;
     
     /**
      * @var array $certifications
@@ -266,6 +273,29 @@ class Member
     public function getShowEmail()
     {
         return $this->showEmail;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param string $photo
+     * @return Member
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+    
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return string 
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
     }
 
     /**
