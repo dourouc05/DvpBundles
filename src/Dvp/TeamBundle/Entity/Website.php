@@ -37,6 +37,13 @@ class Website
      */
     private $url;
     
+    /**
+     * @var array $members
+     * 
+     * @ORM\ManyToMany(targetEntity="Member", mappedBy="websites")
+     */ 
+    private $members;
+    
     public function __toString() {
         return $this->name . ' (' . $this->url . ')';
     }
@@ -95,5 +102,38 @@ class Website
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * Add members
+     *
+     * @param Dvp\TeamBundle\Entity\Member $members
+     * @return Role
+     */
+    public function addMember(\Dvp\TeamBundle\Entity\Member $members)
+    {
+        $this->members[] = $members;
+    
+        return $this;
+    }
+
+    /**
+     * Remove members
+     *
+     * @param Dvp\TeamBundle\Entity\Member $members
+     */
+    public function removeMember(\Dvp\TeamBundle\Entity\Member $members)
+    {
+        $this->members->removeElement($members);
+    }
+
+    /**
+     * Get members
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMembers()
+    {
+        return $this->members;
     }
 }

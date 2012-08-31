@@ -92,7 +92,7 @@ class Member
     /**
      * @var array $sections
      *
-     * @ORM\ManyToMany(targetEntity="Section")
+     * @ORM\ManyToMany(targetEntity="Section", inversedBy="members")
      * @ORM\JoinTable(name="sf2_team_member_section")
      */
     private $sections;
@@ -101,10 +101,7 @@ class Member
      * @var array $websites
      *
      * @ORM\ManyToMany(targetEntity="Website", inversedBy="members")
-     * @ORM\JoinTable(name="sf2_team_member_website",
-     *      joinColumns={@ORM\JoinColumn(name="member_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="website_id", referencedColumnName="id", unique=true)}
-     *      )
+     * @ORM\JoinTable(name="sf2_team_member_website")
      */
     private $websites;
     
