@@ -29,6 +29,11 @@
         <parameter key="dvp.team.admin.category.controller">SonataAdminBundle:CRUD</parameter>
         <parameter key="dvp.team.admin.category.entity">Dvp\TeamBundle\Entity\Category</parameter>
         <parameter key="dvp.team.admin.category.translation_domain">Category</parameter>
+        <!-- WEBSITE -->
+        <parameter key="dvp.team.admin.website.class">Dvp\TeamBundle\Admin\WebsiteAdmin</parameter>
+        <parameter key="dvp.team.admin.website.controller">SonataAdminBundle:CRUD</parameter>
+        <parameter key="dvp.team.admin.website.entity">Dvp\TeamBundle\Entity\Website</parameter>
+        <parameter key="dvp.team.admin.website.translation_domain">Website</parameter>
     </parameters>
 
     <services>
@@ -85,6 +90,17 @@
 
             <call method="setTranslationDomain">
                 <argument>%dvp.team.admin.category.translation_domain%</argument>
+            </call>
+        </service>
+        <service id="dvp.team.admin.website" class="%dvp.team.admin.website.class%">
+            <tag name="sonata.admin" manager_type="orm" group="dvp_team" label="posts" label_catalogue="%dvp.team.admin.website.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
+            
+            <argument />
+            <argument>%dvp.team.admin.website.entity%</argument>
+            <argument>%dvp.team.admin.website.controller%</argument>
+
+            <call method="setTranslationDomain">
+                <argument>%dvp.team.admin.website.translation_domain%</argument>
             </call>
         </service>
     </services>
