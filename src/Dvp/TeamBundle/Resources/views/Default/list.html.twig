@@ -1,38 +1,19 @@
-{% set var = false %}
 {% for member in category.getMembers(section) %}
-    {# Only show hyphen between people #}
-    {% if var == true %}
-        &nbsp;&#0150;&nbsp;
-    {% endif %}
-    <a href="#membre-{{ member.forumId }}" title="{{ member.pseudonym }}">
-        {% if category.bold %}
-            <strong>
-        {% endif %}
-        {{ member.pseudonym }}
-        {% if category.bold %}
-            </strong>
-        {% endif %}
-    </a>
-    {% set var = true %}
-{% endfor %}
-<br/>
-<tr><td>
-<div class="membre" id="membre-<?php echo $r['id']; ?>">
-	<h2 class="nomPrenom"><?php echo utf8_decode($r['prenom']); ?> <?php echo utf8_decode($r['nom']); ?></h2>
+    <tr><td>
+    <div class="membre" id="membre-{{ member.forumId }}">
+	<h2 class="nomPrenom">{{ member.givenName }} {{ member.familyName }}</h2>
 	<div class="photo">
-		<?php
-		if (  file_exists ('./photos/' . $r['pseudo'] . '.jpg')  )
-			echo '<img src="./photos/' . $r['pseudo'] . '.jpg" alt="Photo de ' . $r['pseudo'] . '" />' ;
-		else
-			echo '<img src="./photos/pardefaut.jpg" alt="Pas de photo" />' ;
-		?>
-		<?php if(@$membreCertif[$r['id']]): ?>
-			<?php $i = $membreCertif[$r['id']][0]; //foreach($membreCertif[$r['id']] as $i): // Actuellement il y a qu'un seul logo commun et non pas un logo par certif?>
-				<p>
-					<?php echo image_tag($certif[$i['certif']]['image'], array('alt' => $certif[$i['certif']]['nom'])); ?>
-				</p>
-			<?php //endforeach; ?>
-		<?php endif; ?>
+        {% if member.photo %}
+            <img src="{{ member.photo }}" alt="Photo de {{ member.pseudonym }}"/>
+        {% else %}
+            <img src="./photos/pardefaut.jpg" alt="Pas de photo" />
+        {% endif %}
+        
+        {% for certif in member.certifications %}
+			<p>
+				<img src="{{ certif.imageUrl }}" alt="{{ certif.name }}"/>
+			</p>
+        {% endfor %}
 	</div>
 	<div class="profileTable">
 		<div class="profil">
@@ -40,91 +21,91 @@
 				<span class="legend">Pseudo</span>
 				<span class="ponctuation"> : </span>
 				<span class="content">
-					<a href="<?php echo 'http://www.developpez.net/forums/u' . $r['id'] . '/' . $r['pseudo'] . '/'; ?>" title="Voir le profil"><?php echo $r['pseudo']; ?></a>
+					<a href="http://www.developpez.net/forums/u{{ member.forumId }}/{{ member.pseudonym }}/" title="Voir le profil">{{ member.pseudonym }}</a>
 				</span>
 			</p>
-			<?php if(@$membreRang[$r['id']]): ?>
+            
+            {% if member.roles %}
 			<p class="ligne">
-				<span class="legend">Rôle<?php echo (count($membreRang[$r['id']]) > 1) ? 's' : '';?></span>
+				<span class="legend">RÃ´le{% if member.roles|length > 1 %}s{% endif %}</span>
 				<span class="ponctuation"> : </span>
-				<?php $result = array(); ?>
-				<?php $resultFirst = array(); ?>
-				<?php $resultLast  = array(); ?>
-				<?php foreach($membreRang[$r['id']] as $i): ?>
-					<?php if($i['rang'] == 1 || $i['rang'] == 10 || $i['rang'] == 11 || $i['rang'] == 14 || $i['rang'] == 15): ?>
-						<?php $resultFirst[] = $i; ?>
-					<?php else: ?>
-						<?php $resultLast[] = $i; ?>
-					<?php endif; ?>
-				<?php endforeach; ?>
-				<?php $result = array_merge($resultFirst, $resultLast); ?>
-				<?php $j = 0; ?>
-				<?php foreach($result as $i): ?>
-				<?php if($j == 0): ?>
-				<span class="content">
-				<?php else: ?>
-				<span class="contentB">
-				<?php endif; ?>
-					<?php if($i['rang'] == 1 || $i['rang'] == 10 || $i['rang'] == 11): // rangs de resps en gras ?>
-					<strong>
-					<?php endif; ?>
-					<?php echo utf8_decode($rang[$i['rang']]['nom']); ?><br/>
-					<?php if($i['rang'] == 1 || $i['rang'] == 10 || $i['rang'] == 11): // rangs de resps en gras ?>
-					</strong>
-					<?php endif; ?>
-				</span>
-				<?php ++$j; ?>
-				<?php endforeach; ?>
+                {% set cpt = 0 %}
+                {% for role in member.roles %}
+                    {% set cpt = cpt + 1 %}
+                    <span 
+                        {% if cpt == 1 %}
+                            class="content"
+                        {% else %}
+                            class="contentB"
+                        {% endif %}
+                    >
+                        {% if not role.userAddable %}
+                            <strong>
+                        {% endif %}
+                        {{ role.name }}
+                        {% if not role.userAddable %}
+                            </strong>
+                        {% endif %}
+                    </span>
+                {% endfor %}
 			</p>
-			<?php endif; ?>
-			<?php if(@$membreSite[$r['id']]): ?>
+            {% endif %}
+            
+            {% if member.websites %}
 			<p class="ligne">
-				<span class="legend">Site<?php echo (count($membreSite[$r['id']]) > 1) ? 's' : '';?> Web</span>
+				<span class="legend">Site{% if member.websites|length > 1 %}s{% endif %} Web</span>
 				<span class="ponctuation"> : </span>
-				<?php $j = 0; ?>
-				<?php foreach($membreSite[$r['id']] as $i): ?>
-				<?php if($j == 0): ?>
-				<span class="content">
-				<?php else: ?>
-				<span class="contentB">
-				<?php endif; ?>
-					<?php echo link_to(utf8_decode($i['name']), $i['url']); ?><br/>
-				</span>
-				<?php ++$j; ?>
-				<?php endforeach; ?>
+                {% set cpt = 0 %}
+                {% for website in member.websites %}
+                    {% set cpt = cpt + 1 %}
+                    <span 
+                        {% if cpt == 1 %}
+                            class="content"
+                        {% else %}
+                            class="contentB"
+                        {% endif %}
+                    >
+                        <a href="{{ website.url }}">{{ website.name }}</a>
+                    </span>
+                {% endfor %}
 			</p>
-			<?php endif; ?>
-			<?php if(@$membreCertif[$r['id']]): ?>
+            {% endif %}
+            
+            {% if member.certifications %}
 			<p class="ligne">
-				<span class="legend">Certification<?php echo (count($membreCertif[$r['id']]) > 1) ? 's' : '';?></span>
+				<span class="legend">Certification{% if member.websites|length > 1 %}s{% endif %}</span>
 				<span class="ponctuation"> : </span>
-				<?php $j = 0; ?>
-				<?php foreach($membreCertif[$r['id']] as $i): ?>
-				<?php if($j == 0): ?>
-				<span class="content">
-				<?php else: ?>
-				<span class="contentB">
-				<?php endif; ?>
-					<?php echo $certif[$i['certif']]['nom']; ?><br/>
-				</span>
-				<?php ++$j; ?>
-				<?php endforeach; ?>
+                {% set cpt = 0 %}
+                {% for certif in member.certifications %}
+                    {% set cpt = cpt + 1 %}
+                    <span 
+                        {% if cpt == 1 %}
+                            class="content"
+                        {% else %}
+                            class="contentB"
+                        {% endif %}
+                    >
+                        {{ certif.name }}
+                    </span>
+                {% endfor %}
 			</p>
-			<?php endif; ?>
+            {% endif %}
+            
 			<p class="ligne">
 				<span class="content">
-					<a href="http://www.developpez.net/forums/private.php?do=newpm&amp;u=<?php echo $r['id']; ?>">Envoyer un message privé</a>
+					<a href="http://www.developpez.net/forums/private.php?do=newpm&amp;u={{ member.forumId }}">Envoyer un message privÃ©</a>
 				</span>
-				<?php if($r['email']): ?>
+				{% if member.showEmail %}
 				<span class="content">
-					<a href="mailto:<?php echo $r['email']; ?>">Envoyer un email</a>
+					<a href="mailto:{{ member.email }}">Envoyer un email</a>
 				</span>
-				<?php endif; ?>
+				{% endif %}
 			</p>
 		</div>
 		<div class="photo">
-			<?php echo '<img src="http://www.developpez.net/forums/image.php?u='.$r['id'].'" alt="Avatar de '.$r['pseudo'].'" />'; ?>
+			<img src="http://www.developpez.net/forums/image.php?u={{ member.forumId }}" alt="Avatar de {{ member.pseudonym }}" />
 		</div>
 	</div>
 </div>
 </td></tr>
+{% endfor %}
