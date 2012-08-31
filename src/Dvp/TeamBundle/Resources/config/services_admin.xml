@@ -24,6 +24,11 @@
         <parameter key="dvp.team.admin.section.controller">SonataAdminBundle:CRUD</parameter>
         <parameter key="dvp.team.admin.section.entity">Dvp\TeamBundle\Entity\Section</parameter>
         <parameter key="dvp.team.admin.section.translation_domain">Section</parameter>
+        <!-- CATEGORY -->
+        <parameter key="dvp.team.admin.category.class">Dvp\TeamBundle\Admin\CategoryAdmin</parameter>
+        <parameter key="dvp.team.admin.category.controller">SonataAdminBundle:CRUD</parameter>
+        <parameter key="dvp.team.admin.category.entity">Dvp\TeamBundle\Entity\Category</parameter>
+        <parameter key="dvp.team.admin.category.translation_domain">Category</parameter>
     </parameters>
 
     <services>
@@ -69,6 +74,17 @@
 
             <call method="setTranslationDomain">
                 <argument>%dvp.team.admin.section.translation_domain%</argument>
+            </call>
+        </service>
+        <service id="dvp.team.admin.category" class="%dvp.team.admin.category.class%">
+            <tag name="sonata.admin" manager_type="orm" group="dvp_team" label="posts" label_catalogue="%dvp.team.admin.category.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
+            
+            <argument />
+            <argument>%dvp.team.admin.category.entity%</argument>
+            <argument>%dvp.team.admin.category.controller%</argument>
+
+            <call method="setTranslationDomain">
+                <argument>%dvp.team.admin.category.translation_domain%</argument>
             </call>
         </service>
     </services>

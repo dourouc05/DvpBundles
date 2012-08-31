@@ -12,7 +12,7 @@
             </trans-unit>
             <trans-unit id="breadcrumb.link_role_create">
                 <source>breadcrumb.link_role_create</source>
-                <target>Créer un rôle</target>
+                <target>Créer</target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_role_edit">
                 <source>breadcrumb.link_role_edit</source>

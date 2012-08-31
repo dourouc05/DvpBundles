@@ -4,22 +4,22 @@
         <body>
             <trans-unit id="posts">
                 <source>posts</source>
-                <target>Rubrique</target>
+                <target>Catégorie</target>
             </trans-unit>
-            <trans-unit id="breadcrumb.link_section_list">
-                <source>breadcrumb.link_section_list</source>
-                <target>Rubriques</target>
+            <trans-unit id="breadcrumb.link_category_list">
+                <source>breadcrumb.link_category_list</source>
+                <target>Catégorie</target>
             </trans-unit>
-            <trans-unit id="breadcrumb.link_section_create">
-                <source>breadcrumb.link_section_create</source>
+            <trans-unit id="breadcrumb.link_category_create">
+                <source>breadcrumb.link_category_create</source>
                 <target>Créer</target>
             </trans-unit>
-            <trans-unit id="breadcrumb.link_section_edit">
-                <source>breadcrumb.link_section_edit</source>
+            <trans-unit id="breadcrumb.link_category_edit">
+                <source>breadcrumb.link_category_edit</source>
                 <target>Éditer</target>
             </trans-unit>
-            <trans-unit id="breadcrumb.link_section_show">
-                <source>breadcrumb.link_section_show</source>
+            <trans-unit id="breadcrumb.link_category_show">
+                <source>breadcrumb.link_category_show</source>
                 <target>Afficher</target>
             </trans-unit>
             <trans-unit id="form.label_name">
