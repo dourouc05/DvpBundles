@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="" >
+        <body>
+            <trans-unit id="photo_of">
+                <source>photo_of</source>
+                <target>Photo de %pseudo%</target>
+            </trans-unit>
+            <trans-unit id="avatar_of">
+                <source>avatar_of</source>
+                <target>Avatar de %pseudo%</target>
+            </trans-unit>
+            <trans-unit id="no_photo">
+                <source>no_photo</source>
+                <target>Pas de photo</target>
+            </trans-unit>
+            <trans-unit id="title_pseudo">
+                <source>title_pseudo</source>
+                <target>Pseudo</target>
+            </trans-unit>
+            <trans-unit id="link_seeprofile">
+                <source>link_seeprofile</source>
+                <target>Voir le profil</target>
+            </trans-unit>
+            <trans-unit id="title_roles">
+                <source>title_roles</source>
+                <target>{1}Rôle|]1, +Inf[Rôles</target>
+            </trans-unit>
+            <trans-unit id="title_websites">
+                <source>title_websites</source>
+                <target>{1}Site Web|]1, +Inf[Sites Web</target>
+            </trans-unit>
+            <trans-unit id="title_certifications">
+                <source>title_certifications</source>
+                <target>{1}Certification|]1, +Inf[Certifications</target>
+            </trans-unit>
+            <trans-unit id="send_pm">
+                <source>send_pm</source>
+                <target>Envoyer un message privé</target>
+            </trans-unit>
+            <trans-unit id="send_email">
+                <source>send_email</source>
+                <target>Envoyer un email</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

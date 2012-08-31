@@ -4,9 +4,9 @@
 	<h2 class="nomPrenom">{{ member.givenName }} {{ member.familyName }}</h2>
 	<div class="photo">
         {% if member.photo %}
-            <img src="{{ member.photo }}" alt="Photo de {{ member.pseudonym }}"/>
+            <img src="{{ member.photo }}" alt="{{ "photo_of"|trans({'%pseudo%': member.pseudonym}, 'View') }}"/>
         {% else %}
-            <img src="./photos/pardefaut.jpg" alt="Pas de photo" />
+            <img src="http://photos/pardefaut.jpg" alt="{% trans from "View" %}no_photo{% endtrans %}" />
         {% endif %}
         
         {% for certif in member.certifications %}
@@ -18,16 +18,16 @@
 	<div class="profileTable">
 		<div class="profil">
 			<p class="ligne">
-				<span class="legend">Pseudo</span>
+				<span class="legend">{% trans from "View" %}title_pseudo{% endtrans %}</span>
 				<span class="ponctuation"> : </span>
 				<span class="content">
-					<a href="http://www.developpez.net/forums/u{{ member.forumId }}/{{ member.pseudonym }}/" title="Voir le profil">{{ member.pseudonym }}</a>
+					<a href="http://www.developpez.net/forums/u{{ member.forumId }}/{{ member.pseudonym }}/" title="{% trans from "View" %}link_seeprofile{% endtrans %}">{{ member.pseudonym }}</a>
 				</span>
 			</p>
             
             {% if member.roles %}
 			<p class="ligne">
-				<span class="legend">Rôle{% if member.roles|length > 1 %}s{% endif %}</span>
+				<span class="legend">{{ "title_roles"|transchoice(member.roles|length, {}, 'View') }}</span>
 				<span class="ponctuation"> : </span>
                 {% set cpt = 0 %}
                 {% for role in member.roles %}
@@ -53,7 +53,7 @@
             
             {% if member.websites %}
 			<p class="ligne">
-				<span class="legend">Site{% if member.websites|length > 1 %}s{% endif %} Web</span>
+				<span class="legend">{{ "title_websites"|transchoice(member.websites|length, {}, 'View') }}</span>
 				<span class="ponctuation"> : </span>
                 {% set cpt = 0 %}
                 {% for website in member.websites %}
@@ -73,7 +73,7 @@
             
             {% if member.certifications %}
 			<p class="ligne">
-				<span class="legend">Certification{% if member.websites|length > 1 %}s{% endif %}</span>
+				<span class="legend">{{ "title_certifications"|transchoice(member.certifications|length, {}, 'View') }}</span>
 				<span class="ponctuation"> : </span>
                 {% set cpt = 0 %}
                 {% for certif in member.certifications %}
@@ -93,17 +93,17 @@
             
 			<p class="ligne">
 				<span class="content">
-					<a href="http://www.developpez.net/forums/private.php?do=newpm&amp;u={{ member.forumId }}">Envoyer un message privé</a>
+					<a href="http://www.developpez.net/forums/private.php?do=newpm&amp;u={{ member.forumId }}">{% trans from "View" %}send_pm{% endtrans %}</a>
 				</span>
 				{% if member.showEmail %}
 				<span class="content">
-					<a href="mailto:{{ member.email }}">Envoyer un email</a>
+					<a href="mailto:{{ member.email }}">{% trans from "View" %}send_email{% endtrans %}</a>
 				</span>
 				{% endif %}
 			</p>
 		</div>
 		<div class="photo">
-			<img src="http://www.developpez.net/forums/image.php?u={{ member.forumId }}" alt="Avatar de {{ member.pseudonym }}" />
+			<img src="http://www.developpez.net/forums/image.php?u={{ member.forumId }}" alt="{{ "avatar_of"|trans({'%pseudo%': member.pseudonym}, 'View') }}Avatar de {{ member.pseudonym }}" />
 		</div>
 	</div>
 </div>
