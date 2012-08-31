@@ -149,9 +149,9 @@ class Category
             $result = array(); 
             
             foreach($this->members as $m) {
-                // if($m->getSections()->contains($section)) {
-                    // $result[] = $m;
-                // }
+                if($m->getSections()->contains($section)) {
+                    $result[] = $m;
+                }
             }
             
             return $result; 

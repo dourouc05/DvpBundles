@@ -1,11 +1,10 @@
 {% set var = false %}
 {% for member in category.getMembers(section) %}
+    {# Only show hyphen between people #}
+    {% if var == true %}
+        &nbsp;&#0150;&nbsp;
+    {% endif %}
+    <a href="#membre-{{ member.forumId }}" title="{{ member.pseudonym }}">{{ member.pseudonym }}</a>
+    {% set var = true %}
 {% endfor %}
-<?php foreach($list as $r): ?>
-	<?php if($true): ?>
-		&nbsp;-&nbsp;
-	<?php endif; ?>
-	<a href="#membre-<?php echo $r['id']; ?>" title="<?php echo $r['pseudo']; ?>"><?php echo $r['pseudo']; ?></a>
-	<?php $true = true; ?>
-<?php endforeach; ?>
 <br/>
