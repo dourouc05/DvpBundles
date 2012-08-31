@@ -43,6 +43,20 @@ class Section
      * @ORM\Column(type="integer")
      */
     private $gabId;
+
+    /**
+     * @var string $image
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
+    /**
+     * @var string $text
+     *
+     * @ORM\Column(type="text", length=255)
+     */
+    private $text;
     
     /**
      * @var array $members
@@ -50,6 +64,7 @@ class Section
      * @ORM\ManyToMany(targetEntity="Member", mappedBy="sections")
      */ 
     private $members;
+    
     /**
      * Constructor
      */
@@ -139,6 +154,29 @@ class Section
     public function getGabId()
     {
         return $this->gabId;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     * @return Section
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    
+        return $image;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 
     /**

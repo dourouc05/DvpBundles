@@ -36,7 +36,9 @@ class LoadTeamData implements FixtureInterface
         $s = new Section(); 
         $s->setName('Useless section')
           ->setSlug('useless')
-          ->setGabId(65);
+          ->setGabId(65)
+          ->setImage('http://www.developpez.com/template/images/logo.png')
+          ->setText('42');
     
         $m = new Member();
         $m->setFamilyName('Doe')
