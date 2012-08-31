@@ -26,9 +26,23 @@ class Section
     /**
      * @var string $name
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var string $slug
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
+    /**
+     * @var integer $gabId
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $gabId;
     
     /**
      * @var array $members
@@ -79,6 +93,52 @@ class Section
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Section
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $slug;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set gabId
+     *
+     * @param string $gabId
+     * @return Section
+     */
+    public function setGabId($gabId)
+    {
+        $this->gabId = $gabId;
+    
+        return $gabId;
+    }
+
+    /**
+     * Get gabId
+     *
+     * @return string 
+     */
+    public function getGabId()
+    {
+        return $this->gabId;
     }
 
     /**

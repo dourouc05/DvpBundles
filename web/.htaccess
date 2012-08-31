@@ -8,3 +8,4 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ app.php [QSA,L]
 </IfModule>
+php_flag display_errors 1
