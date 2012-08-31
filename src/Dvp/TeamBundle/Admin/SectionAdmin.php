@@ -26,6 +26,8 @@ class SectionAdmin extends Admin
             ->add('name')
             ->add('slug')
             ->add('gabId')
+            ->add('image')
+            ->add('text')
         ;
     }
 
