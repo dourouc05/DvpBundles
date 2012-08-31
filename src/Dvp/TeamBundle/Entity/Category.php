@@ -3,6 +3,7 @@
 namespace Dvp\TeamBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Dvp\TeamBundle\Entity\Section;
 
 /**
  * Dvp\TeamBundle\Entity\Category
@@ -26,14 +27,21 @@ class Category
     /**
      * @var string $name
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var boolean $bold
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $bold;
     
     /**
      * @var array $members
      * 
-     * @ORM\ManyToMany(targetEntity="Member", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Member", mappedBy="category")
      */ 
     private $members;
     
@@ -81,6 +89,29 @@ class Category
     {
         return $this->name;
     }
+
+    /**
+     * Set bold
+     *
+     * @param boolean $bold
+     * @return Category
+     */
+    public function setBold($bold)
+    {
+        $this->bold = $bold;
+    
+        return $this;
+    }
+
+    /**
+     * Get bold
+     *
+     * @return boolean
+     */
+    public function isBold()
+    {
+        return $this->bold;
+    }
     
     /**
      * Add members
@@ -106,12 +137,24 @@ class Category
     }
 
     /**
-     * Get members
+     * Get members in this category and a specific section. 
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getMembers()
+    public function getMembers(Section $section = null)
     {
-        return $this->members;
+        if(! $section) {
+            return $this->members;
+        } else {
+            $result = array(); 
+            
+            foreach($this->members as $m) {
+                // if($m->getSections()->contains($section)) {
+                    // $result[] = $m;
+                // }
+            }
+            
+            return $result; 
+        }
     }
 }

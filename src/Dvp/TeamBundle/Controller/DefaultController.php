@@ -9,24 +9,32 @@ class DefaultController extends Controller
 {
     public function indexAction($section)
     {
-        $s = $this->getDoctrine()
-                  ->getManager()
-                  ->getRepository('DvpTeamBundle:Section')
-                  ->findOneBySlug($section); 
+        /// Get page information. 
+        $repoSection = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('DvpTeamBundle:Section'); 
     
-        if(! $s) {
-            $s = $this->getDoctrine()
-                      ->getManager()
-                      ->getRepository('DvpTeamBundle:Section')
-                      ->findAll(); 
-            $s = $s[0];
-                      
-            return $this->redirect($this->generateUrl('DvpTeamBundle_homepage', array('section' => $s->getSlug())));
+        $section = $repoSection->findOneBySlug($section); 
+    
+        // Bad URL. Redirect to the first page. 
+        if(! $section) {
+            $section = $repoSection->findAll(); 
+            return $this->redirect($this->generateUrl('DvpTeamBundle_homepage', array('section' => $section[0]->getSlug())));
         }
-    
-        $h = new Header('L\'équipe ' . $s->getName() . ' de Developpez.com', $s->getGabId());
         
+        /// Get page members (via the categories). 
+        // $em = $this->getDoctrine()->getManager();
+        // $q = $em->createQuery('SELECT m FROM DvpTeamBundle:Member m WHERE '); 
+        $categories = $this->getDoctrine()
+                           ->getManager()
+                           ->getRepository('DvpTeamBundle:Category')
+                           ->findAll(); 
         
-        return $this->render('DvpTeamBundle:Default:index.html.twig', array('section' => $s, 'up' => $h->toHtml5()));
+        /// Get template. 
+        $h = new Header('L\'équipe ' . $section->getName() . ' de Developpez.com', $section->getGabId());
+        $f = ''; 
+        
+        /// Done. 
+        return $this->render('DvpTeamBundle:Default:index.html.twig', array('section' => $section, 'categories' => $categories, 'up' => $h->toHtml5(), 'down' => $f));
     }
 }

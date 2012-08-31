@@ -8,10 +8,9 @@
 			<br/><br/><br/><br/><br/><br/>
             {{ section.text }}
 			<p class="presentation" style="text-align:center; padding-top: 1px">
-				<?php include_partial('header_list_bold', array('list' => $resps)); ?>
-				<?php include_partial('header_list', array('list' => $redacs)); ?>
-				<?php include_partial('header_list', array('list' => $autres)); ?>
-				<?php include_partial('header_list', array('list' => $anciens)); ?>
+                {% for category in categories %}
+                    {% include 'DvpTeamBundle:Default:list.html.twig' with {'category': category, 'section': section} only %}
+                {% endfor %}
 			</p>
 		</div>
 		<div id="membres">
@@ -32,3 +31,4 @@
 		</div>
 	</div>
 </div>
+{{ down|raw }}

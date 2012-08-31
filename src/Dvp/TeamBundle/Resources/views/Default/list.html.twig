@@ -1,0 +1,11 @@
+{% set var = false %}
+{% for member in category.getMembers(section) %}
+{% endfor %}
+<?php foreach($list as $r): ?>
+	<?php if($true): ?>
+		&nbsp;-&nbsp;
+	<?php endif; ?>
+	<a href="#membre-<?php echo $r['id']; ?>" title="<?php echo $r['pseudo']; ?>"><?php echo $r['pseudo']; ?></a>
+	<?php $true = true; ?>
+<?php endforeach; ?>
+<br/>

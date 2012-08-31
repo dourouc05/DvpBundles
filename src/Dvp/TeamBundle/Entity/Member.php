@@ -84,7 +84,7 @@ class Member
     /**
      * @var Category $category
      *
-     * @ORM\ManyToOne(targetEntity="Category")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="members")
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
