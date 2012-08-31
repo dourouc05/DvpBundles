@@ -1,0 +1,18 @@
+{% set var = false %}
+{% for member in category.getMembers(section) %}
+    {# Only show hyphen between people #}
+    {% if var == true %}
+        &nbsp;&#0150;&nbsp;
+    {% endif %}
+    <a href="#membre-{{ member.forumId }}" title="{{ member.pseudonym }}">
+        {% if category.bold %}
+            <strong>
+        {% endif %}
+        {{ member.pseudonym }}
+        {% if category.bold %}
+            </strong>
+        {% endif %}
+    </a>
+    {% set var = true %}
+{% endfor %}
+<br/>

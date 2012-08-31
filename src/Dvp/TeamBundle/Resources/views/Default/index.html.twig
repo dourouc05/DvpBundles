@@ -9,24 +9,15 @@
             {{ section.text }}
 			<p class="presentation" style="text-align:center; padding-top: 1px">
                 {% for category in categories %}
-                    {% include 'DvpTeamBundle:Default:list.html.twig' with {'category': category, 'section': section} only %}
+                    {% include 'DvpTeamBundle:Default:headerList.html.twig' with {'category': category, 'section': section} only %}
                 {% endfor %}
 			</p>
 		</div>
 		<div id="membres">
 			<table style="width: 100%;">
-			<?php foreach($resps as $r): ?>
-				<?php include_partial('content_member', array('r' => $r, 'certif' => $certif, 'rang' => $rang, 'membreCertif' => $membreCertif, 'membreRang' => $membreRang, 'membreSite' => $membreSite)); ?>
-			<?php endforeach; ?>
-			<?php foreach($redacs as $r): ?>
-				<?php include_partial('content_member', array('r' => $r, 'certif' => $certif, 'rang' => $rang, 'membreCertif' => $membreCertif, 'membreRang' => $membreRang, 'membreSite' => $membreSite)); ?>
-			<?php endforeach; ?>
-			<?php foreach($autres as $r): ?>
-				<?php include_partial('content_member', array('r' => $r, 'certif' => $certif, 'rang' => $rang, 'membreCertif' => $membreCertif, 'membreRang' => $membreRang, 'membreSite' => $membreSite)); ?>
-			<?php endforeach; ?>
-			<?php foreach($anciens as $r): ?>
-				<?php include_partial('content_member', array('r' => $r, 'certif' => $certif, 'rang' => $rang, 'membreCertif' => $membreCertif, 'membreRang' => $membreRang, 'membreSite' => $membreSite)); ?>
-			<?php endforeach; ?>
+                {% for category in categories %}
+                    {% include 'DvpTeamBundle:Default:list.html.twig' with {'category': category, 'section': section} only %}
+                {% endfor %}
 			</table>
 		</div>
 	</div>
