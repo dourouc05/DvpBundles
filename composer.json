@@ -23,7 +23,8 @@
         "sonata-project/admin-bundle": "dev-master",
         "sonata-project/doctrine-orm-admin-bundle": "dev-master",
         "simplethings/entity-audit-bundle": "dev-master",
-        "jms/translation-bundle": "dev-master"
+        "jms/translation-bundle": "dev-master",
+        "dvp/gabarit-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
