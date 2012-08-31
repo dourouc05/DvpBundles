@@ -34,7 +34,9 @@ class LoadTeamData implements FixtureInterface
           ->setUrl('http://example.com/');
     
         $s = new Section(); 
-        $s->setName('Useless section');
+        $s->setName('Useless section')
+          ->setSlug('useless')
+          ->setGabId(65);
     
         $m = new Member();
         $m->setFamilyName('Doe')

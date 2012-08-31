@@ -24,6 +24,8 @@ class SectionAdmin extends Admin
     {
         $formMapper
             ->add('name')
+            ->add('slug')
+            ->add('gabId')
         ;
     }
 
