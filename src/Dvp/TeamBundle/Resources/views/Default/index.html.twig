@@ -1,27 +1,43 @@
-
-
-{{ up|raw }}
-<div id="teamPage">
-	<div id="container">
-		<div id="header">
-            <div id="logo" style="text-align: center">
-                <img src="{{ section.image }}" alt="Logo"/>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>L'équipe {{ section.name }} de Developpez.com</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="generator" content="DvpTeamBundle" />
+        <meta name="robots" content="index, follow" />
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="image_src" href="http://www.developpez.com/facebook-icon.png" />
+        <link rel="stylesheet" type="text/css" href="/template/gabarit0.css" />
+        <link rel="stylesheet" type="text/css" media="print" href="http://www.developpez.com/template/printer.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="http://www.developpez.com/public/css/index2.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="http://www.developpez.com/template/kit/article.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('bundles/dvpteam/index.css') }}" />
+    </head>
+    <body xml:lang="fr">
+        {{ 65|gab_up }}
+        <div id="teamPage">
+            <div id="container">
+                <div id="header">
+                    <div id="logo" style="text-align: center">
+                        <img src="{{ section.image }}" alt="Logo"/>
+                    </div>
+                    <br/><br/><br/><br/><br/><br/>
+                    {{ section.text }}
+                    <p class="presentation" style="text-align:center; padding-top: 1px">
+                        {% for category in categories %}
+                            {% include 'DvpTeamBundle:Default:headerList.html.twig' with {'category': category, 'section': section} only %}
+                        {% endfor %}
+                    </p>
+                </div>
+                <div id="membres">
+                    <table style="width: 100%;">
+                        {% for category in categories %}
+                            {% include 'DvpTeamBundle:Default:list.html.twig' with {'category': category, 'section': section} only %}
+                        {% endfor %}
+                    </table>
+                </div>
             </div>
-			<br/><br/><br/><br/><br/><br/>
-            {{ section.text }}
-			<p class="presentation" style="text-align:center; padding-top: 1px">
-                {% for category in categories %}
-                    {% include 'DvpTeamBundle:Default:headerList.html.twig' with {'category': category, 'section': section} only %}
-                {% endfor %}
-			</p>
-		</div>
-		<div id="membres">
-			<table style="width: 100%;">
-                {% for category in categories %}
-                    {% include 'DvpTeamBundle:Default:list.html.twig' with {'category': category, 'section': section} only %}
-                {% endfor %}
-			</table>
-		</div>
-	</div>
-</div>
-{{ down|raw }}
+        </div>
+        {{ 65|gab_down }}
+    </body>
+</html>
