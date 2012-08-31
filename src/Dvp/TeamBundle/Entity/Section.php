@@ -180,6 +180,29 @@ class Section
     }
 
     /**
+     * Set text
+     *
+     * @param string $text
+     * @return Section
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+    
+        return $text;
+    }
+
+    /**
+     * Get text
+     *
+     * @return string 
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
      * Add members
      *
      * @param Dvp\TeamBundle\Entity\Member $members

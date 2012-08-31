@@ -27,6 +27,6 @@ class DefaultController extends Controller
         $h = new Header('L\'équipe ' . $s->getName() . ' de Developpez.com', $s->getGabId());
         
         
-        return $this->render('DvpTeamBundle:Default:index.html.twig', array('name' => $section, 'up' => $h->toHtml5()));
+        return $this->render('DvpTeamBundle:Default:index.html.twig', array('section' => $s, 'up' => $h->toHtml5()));
     }
 }
