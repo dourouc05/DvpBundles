@@ -19,6 +19,11 @@
         <parameter key="dvp.team.admin.role.controller">SonataAdminBundle:CRUD</parameter>
         <parameter key="dvp.team.admin.role.entity">Dvp\TeamBundle\Entity\Role</parameter>
         <parameter key="dvp.team.admin.role.translation_domain">Role</parameter>
+        <!-- SECTION -->
+        <parameter key="dvp.team.admin.section.class">Dvp\TeamBundle\Admin\SectionAdmin</parameter>
+        <parameter key="dvp.team.admin.section.controller">SonataAdminBundle:CRUD</parameter>
+        <parameter key="dvp.team.admin.section.entity">Dvp\TeamBundle\Entity\Section</parameter>
+        <parameter key="dvp.team.admin.section.translation_domain">Section</parameter>
     </parameters>
 
     <services>
@@ -28,22 +33,7 @@
             <argument />
             <argument>%dvp.team.admin.member.entity%</argument>
             <argument>%dvp.team.admin.member.controller%</argument>
-            <!--<argument />
-            <argument>%dvp.team.admin.member.class%</argument>
-            <argument>%dvp.team.admin.member.controller%</argument>-->
-<!--
-            <call method="setUserManager">
-                <argument type="service" id="fos_user.user_manager" />
-            </call>
-
-            <call method="setPoolFormatter">
-                <argument type="service" id="sonata.formatter.pool" />
-            </call>
-
-            <call method="addChild">
-                <argument type="service" id="sonata.news.admin.comment" />
-            </call>-->
-
+            
             <call method="setTranslationDomain">
                 <argument>%dvp.team.admin.member.translation_domain%</argument>
             </call>
@@ -68,6 +58,17 @@
 
             <call method="setTranslationDomain">
                 <argument>%dvp.team.admin.role.translation_domain%</argument>
+            </call>
+        </service>
+        <service id="dvp.team.admin.section" class="%dvp.team.admin.section.class%">
+            <tag name="sonata.admin" manager_type="orm" group="dvp_team" label="posts" label_catalogue="%dvp.team.admin.section.translation_domain%" label_translator_strategy="sonata.admin.label.strategy.underscore" />
+            
+            <argument />
+            <argument>%dvp.team.admin.section.entity%</argument>
+            <argument>%dvp.team.admin.section.controller%</argument>
+
+            <call method="setTranslationDomain">
+                <argument>%dvp.team.admin.section.translation_domain%</argument>
             </call>
         </service>
     </services>

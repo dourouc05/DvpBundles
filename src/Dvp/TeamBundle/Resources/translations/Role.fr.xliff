@@ -4,15 +4,15 @@
         <body>
             <trans-unit id="posts">
                 <source>posts</source>
-                <target>Rôles</target>
+                <target>Rôle</target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_role_list">
                 <source>breadcrumb.link_role_list</source>
-                <target>Rôles</target>
+                <target>Rôle</target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_role_create">
                 <source>breadcrumb.link_role_create</source>
-                <target>Créer</target>
+                <target>Créer un rôle</target>
             </trans-unit>
             <trans-unit id="breadcrumb.link_role_edit">
                 <source>breadcrumb.link_role_edit</source>
