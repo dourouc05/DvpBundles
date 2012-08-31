@@ -5,10 +5,8 @@ namespace Dvp\TeamBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Dvp\GabaritBundle\Gabarit\Header; 
 
-class DefaultController extends Controller
-{
-    public function indexAction($section)
-    {
+class DefaultController extends Controller {
+    public function indexAction($section) {
         /// Get page information. 
         $repoSection = $this->getDoctrine()
                             ->getManager()
@@ -36,5 +34,8 @@ class DefaultController extends Controller
         
         /// Done. 
         return $this->render('DvpTeamBundle:Default:index.html.twig', array('section' => $section, 'categories' => $categories, 'up' => $h->toHtml5(), 'down' => $f));
+    }
+    
+    public function importDataAction() {
     }
 }
