@@ -41,81 +41,6 @@ class DefaultController extends Controller {
     /** Original dump **/
 /*
 --
--- Table structure for table `membre`
---
-
-CREATE TABLE IF NOT EXISTS `membre` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `nom` text,
-  `prenom` text,
-  `pseudo` text,
-  `resp` tinyint(1) default NULL,
-  `redac` tinyint(1) default NULL,
-  `ancien` tinyint(1) default NULL,
-  `email` text,
-  `valide` tinyint(1) NOT NULL,
-  `pyside` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=408668 ;
-
---
--- Dumping data for table `membre`
---
-
-INSERT INTO `membre` (`id`, `nom`, `prenom`, `pseudo`, `resp`, `redac`, `ancien`, `email`, `valide`, `pyside`) VALUES
-(33090, 'Verdavaine', 'Yan', 'yan', 0, 1, 0, 'yan.verdavaine@redaction-developpez.com', 1, 0),
-(44506, 'Courtois', 'Jonathan', 'johnlamericain', 1, 1, 0, 'jonathan.courtois@redaction-developpez.com', 1, 0),
-(57426, 'Poulain', 'Benjamin', 'Ikipou', 0, 0, 0, 'ikipou@gmail.com', 1, 0),
-(63689, 'Charles', 'Pierre-François', 'charlespf', 0, 0, 0, 'charlespf38@hotmail.com', 1, 0),
-(67052, 'Mestan', 'Alp', 'Alp', 0, 1, 0, 'alp@redaction-developpez.com', 1, 0),
-(72448, 'Yoann', 'Moreau', 'YoniBlond', 0, 1, 0, 'moreau.yo@gmail.com', 1, 0),
-(108609, 'Loïc', 'Leguay', 'Loic31', 0, 0, 0, 'loic_leguay@yahoo.fr', 1, 0),
-(126136, 'Jaffré', 'François', 'superjaja', 0, 1, 0, 'francois.jaffre@redaction-developpez.com', 1, 0),
-(135545, 'Gentil', 'Charles-Élie', 'Jiyuu', 0, 1, 0, 'gentilcharlie@yahoo.fr', 1, 1),
-(161714, 'Decombe', 'Etienne', 'Gulish', 0, 0, 0, 'decombe.etienne@gmail.com', 1, 0),
-(169573, 'Sorant', 'Jérémy', 'Niak74', 0, 0, 0, 'jsorant@gmail.com', 1, 0),
-(193107, 'Bonnier', 'Cédric', 'myzu69', 0, 0, 0, 'myzu69@gmail.com', 1, 0),
-(240267, 'Laurent', 'Alexandre', 'LittleWhite', 0, 1, 0, 'thedograge@hotmail.fr', 1, 0),
-(254882, 'Cuvelier', 'Thibaut', 'dourouc05', 1, 1, 0, 'tcuvelier@redaction-developpez.com', 1, 1),
-(268393, 'Belz', 'Guillaume', 'gbdivers', 0, 1, 0, 'guillaume.belz@free.fr', 1, 0),
-(290340, 'Deladda', 'Jérôme', 'Attrox', 0, 0, 0, 'jeromedeledda@gmail.com', 1, 0),
-(292096, 'du Verdier', 'Louis', 'Amnell', 0, 1, 0, 'zemassacreur@yahoo.fr', 1, 0),
-(333286, 'Renault', 'Florent', 'GreatTux', 0, 0, 0, 'renault.florent@gmail.com', 1, 0),
-(341511, 'Hafidi', 'Abdelhafid', 'std_abdel', 0, 0, 0, 'abdelite.algebra@gmail.com', 1, 0),
-(345570, 'Genet', 'Francis', 'frifri59', 0, 0, 0, 'francis.genet@supinfo.com', 1, 0),
-(352080, 'Meyer', 'Vincent', '0x4e84', 0, 0, 0, 'viinceent.meeyeer@gmail.com', 1, 1),
-(360054, 'Rigal', 'Pierre-Nicolas', 'sysedit', 0, 0, 0, 'qt-contrib@p-n-r.com', 1, 0),
-(378458, 'Halgand', 'Florentin', 'Architekth', 0, 0, 0, 'architekth@gmail.com', 1, 0),
-(408667, 'Di Clemente', 'Emmanuel', 'manudiclemente', 0, 0, 0, 'manudiclemente@gmail.fr', 1, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `membre_certif`
---
-
-CREATE TABLE IF NOT EXISTS `membre_certif` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `membre` bigint(20) default NULL,
-  `certif` bigint(20) default NULL,
-  PRIMARY KEY  (`id`),
-  KEY `membre_idx` (`membre`),
-  KEY `certif_idx` (`certif`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `membre_certif`
---
-
-INSERT INTO `membre_certif` (`id`, `membre`, `certif`) VALUES
-(1, 44506, 1),
-(2, 360054, 1),
-(3, 44506, 2),
-(4, 44506, 3);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `membre_rang`
 --
 
@@ -244,13 +169,14 @@ INSERT INTO `membre_site` (`id`, `url`, `name`, `membre`) VALUES
         $dbh = new \PDO('mysql:host=' . $dbHost . ';dbname=' . $dbDb, $dbUser, $dbPwd);
         $em = $this->getDoctrine()->getManager(); 
         
-        // $certifs = $this->importCertifications($em, $dbh); 
+        $certifs = $this->importCertifications($em, $dbh); 
         // $roles = $this->importRoles($em, $dbh); 
         $sections = $this->importSections($em); 
         $categories = $this->importCategories($em); 
         $members = $this->importMembers($em, $dbh, $sections, $categories); 
+        $this->mapMembersWithCertifications($em, $dbh, $members, $certifs);
         
-        $em->flush(); 
+        //$em->flush(); 
     }
     
     private function importCertifications(EntityManager $em, \PDO $dbh) {
@@ -384,5 +310,13 @@ EOD;
         }
         
         return $members;
+    }
+    
+    private function mapMembersWithCertifications(EntityManager $em, \PDO $dbh, array $members, array $certifs) {
+        $res = $dbh->query('SELECT * FROM `membre_certif`');
+        
+        while(($m = $res->fetch())) {
+            $members[$m['membre']]->addCertification($certifs[$m['certif']]); 
+        }
     }
 }
