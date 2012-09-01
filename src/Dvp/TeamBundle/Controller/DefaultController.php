@@ -3,6 +3,13 @@
 namespace Dvp\TeamBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\ORM\EntityManager; 
+use Dvp\TeamBundle\Entity\Member; 
+use Dvp\TeamBundle\Entity\Certification; 
+use Dvp\TeamBundle\Entity\Role; 
+use Dvp\TeamBundle\Entity\Website; 
+use Dvp\TeamBundle\Entity\Section; 
+use Dvp\TeamBundle\Entity\Category; 
 
 class DefaultController extends Controller {
     public function indexAction($section) {
@@ -33,46 +40,6 @@ class DefaultController extends Controller {
     
     /** Original dump **/
 /*
--- phpMyAdmin SQL Dump
--- version 3.5.2
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Sep 01, 2012 at 02:59 PM
--- Server version: 5.0.84
--- PHP Version: 5.3.14
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
---
--- Database: `qt`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `certif`
---
-
-CREATE TABLE IF NOT EXISTS `certif` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `nom` text,
-  `image` text NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `certif`
---
-
-INSERT INTO `certif` (`id`, `nom`, `image`) VALUES
-(1, 'Qt Essentials 1.0', 'logo_qt_developer.png'),
-(2, 'Qualified in C++ with Qt', 'logo_qt_developer.png'),
-(3, 'Advanced Widget UI', 'logo_qt_developer.png');
-
--- --------------------------------------------------------
-
 --
 -- Table structure for table `membre`
 --
@@ -334,7 +301,48 @@ ALTER TABLE `membre_rang`
 ALTER TABLE `membre_site`
   ADD CONSTRAINT `membre_site_membre_membre_id` FOREIGN KEY (`membre`) REFERENCES `membre` (`id`);
 */
-    public function importAction() {
-        return new Response();
+    // One-shot function. 
+    public function importAction($dbHost, $dbDb, $dbUser, $dbPwd) {
+        $dbh = new \PDO('mysql:host=' . $dbHost . ';dbname=' . $dbDb, $dbUser, $dbPwd);
+        $em = $this->getDoctrine()->getManager(); 
+        
+        // $certifs = $this->importCertifications($em, $dbh); 
+        $roles = $this->importRoles($em, $dbh); 
+        
+        $em->flush(); 
+    }
+    
+    private function importCertifications(EntityManager $em, \PDO $dbh) {
+        $res = $dbh->query('SELECT * FROM `certif`');
+        
+        $certifs = array(); 
+        
+        while(($c = $res->fetch())) {
+            $certif = new Certification(); 
+            $certif->setName($c['nom']); 
+            $certif->setImageUrl('http://qt.developpez.com/images/equipe/certifications/' . $c['image']); 
+            
+            $em->persist($certif);
+            $certifs[$c['id']] = $certif; 
+        }
+        
+        return $certifs;
+    }
+    
+    private function importRoles(EntityManager $em, \PDO $dbh) {
+        $res = $dbh->query('SELECT * FROM `rang`');
+        
+        $roles = array(); 
+        
+        while(($r = $res->fetch())) {
+            $role = new Role(); 
+            $role->setName(utf8_encode($r['nom']));
+            $role->setUserAddable((bool) $r['useraddable']); 
+            
+            $em->persist($role);
+            $roles[$r['id']] = $role; 
+        }
+        
+        return $roles;
     }
 }

@@ -4,4 +4,4 @@ DvpTeamBundle_homepage:
 
 DvpTeamBundle_import: 
     pattern: /import/{dbHost}/{dbDb}/{dbUser}/{dbPwd}
-    defaults: { _controller: DvpTeamBundle:Default:import }
+    defaults: { _controller: DvpTeamBundle:Default:import, dbPwd: null }
