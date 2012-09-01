@@ -238,68 +238,6 @@ INSERT INTO `membre_site` (`id`, `url`, `name`, `membre`) VALUES
 (14, 'http://blog.developpez.com/jiyuu', 'Blog', 135545),
 (15, 'http://ceg.developpez.com/', 'Site Web', 135545),
 (16, 'http://ymoreau.users.sourceforge.net ', 'Site Web', 72448);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `rang`
---
-
-CREATE TABLE IF NOT EXISTS `rang` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `nom` text,
-  `useraddable` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
-
---
--- Dumping data for table `rang`
---
-
-INSERT INTO `rang` (`id`, `nom`, `useraddable`) VALUES
-(1, 'Responsable de rubrique', 0),
-(2, 'Modérateur du forum', 1),
-(3, 'Rédacteur d''articles', 1),
-(4, 'Rédacteur pour la FAQ', 1),
-(5, 'Rédacteur du blog (newser)', 1),
-(6, 'Rédacteur du wiki', 0),
-(7, 'Traducteur des Qt Quaterly', 1),
-(8, 'Traducteur des Qt Labs', 1),
-(9, 'Traducteur de la doc', 1),
-(10, 'Responsable des Qt Quarterly', 0),
-(11, 'Responsable des Qt Labs', 0),
-(12, 'Relecteur pour la FAQ', 0),
-(13, 'Testeur pour la FAQ', 0),
-(14, 'Coordinateur adjoint FAQ', 0),
-(15, 'Coordinateur FAQ', 0),
-(16, 'Traducteur pour la FAQ', 1),
-(17, 'Assurance qualité pour la FAQ', 0),
-(18, 'Traducteur du Qt Developer Network', 1),
-(19, 'Traducteur pour divers projets', 1);
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `membre_certif`
---
-ALTER TABLE `membre_certif`
-  ADD CONSTRAINT `membre_certif_certif_certif_id` FOREIGN KEY (`certif`) REFERENCES `certif` (`id`),
-  ADD CONSTRAINT `membre_certif_membre_membre_id` FOREIGN KEY (`membre`) REFERENCES `membre` (`id`);
-
---
--- Constraints for table `membre_rang`
---
-ALTER TABLE `membre_rang`
-  ADD CONSTRAINT `membre_rang_membre_membre_id` FOREIGN KEY (`membre`) REFERENCES `membre` (`id`),
-  ADD CONSTRAINT `membre_rang_rang_rang_id` FOREIGN KEY (`rang`) REFERENCES `rang` (`id`);
-
---
--- Constraints for table `membre_site`
---
-ALTER TABLE `membre_site`
-  ADD CONSTRAINT `membre_site_membre_membre_id` FOREIGN KEY (`membre`) REFERENCES `membre` (`id`);
 */
     // One-shot function. 
     public function importAction($dbHost, $dbDb, $dbUser, $dbPwd) {
@@ -307,7 +245,9 @@ ALTER TABLE `membre_site`
         $em = $this->getDoctrine()->getManager(); 
         
         // $certifs = $this->importCertifications($em, $dbh); 
-        $roles = $this->importRoles($em, $dbh); 
+        // $roles = $this->importRoles($em, $dbh); 
+        $sections = $this->importSections($em, $dbh); 
+        // $members = $this->importMembers($em, $dbh); 
         
         $em->flush(); 
     }
@@ -319,8 +259,8 @@ ALTER TABLE `membre_site`
         
         while(($c = $res->fetch())) {
             $certif = new Certification(); 
-            $certif->setName($c['nom']); 
-            $certif->setImageUrl('http://qt.developpez.com/images/equipe/certifications/' . $c['image']); 
+            $certif->setName($c['nom'])
+                   ->setImageUrl('http://qt.developpez.com/images/equipe/certifications/' . $c['image']); 
             
             $em->persist($certif);
             $certifs[$c['id']] = $certif; 
@@ -336,13 +276,68 @@ ALTER TABLE `membre_site`
         
         while(($r = $res->fetch())) {
             $role = new Role(); 
-            $role->setName(utf8_encode($r['nom']));
-            $role->setUserAddable((bool) $r['useraddable']); 
+            $role->setName(utf8_encode($r['nom']))
+                 ->setUserAddable((bool) $r['useraddable']); 
             
             $em->persist($role);
             $roles[$r['id']] = $role; 
         }
         
         return $roles;
+    }
+    
+    private function importSections(EntityManager $em, \PDO $dbh) {
+        $sections = array(); 
+        
+        $qtText = <<<EOD
+<p class="presentation">
+	Une petite équipe sympathique présente pour vous aider et qui essaie de contribuer à l'évolution de vos connaissances dans le domaine de la programmation avec Qt. Nous avons la vocation d'échange dans la simplicité et l'amitié, tout en respectant les consignes du site qui a la gentillesse d'héberger <a href="http://www.developpez.net/forums/f376/c-cpp/bibliotheques/qt/">nos forums</a> et nos modestes moyens (tels que la <a href="http://qt.developpez.com/faq/">FAQ</a>, les <a href="http://qt.developpez.com/tutoriels/">tutoriels</a>, les <a href="http://qt-quarterly.developpez.com/">traductions des Qt Quarterly</a>, les <a href="http://qt-labs.developpez.com/">traductions des Qt Labs</a>, les <a href="http://qt-devnet.developpez.com/">traductions du Qt Developer Network</a>, les <a href="http://qt.developpez.com/outils/">outils</a>, les <a href="http://qt.developpez.com/livres/">critiques de livres</a> et le <a href="http://blog.developpez.com/recap/qt">blog</a>), témoins de notre volonté d'échange dans une ambiance de franche amitié.
+</p>
+EOD;
+        $pyqtText = <<<EOD
+<p class="presentation">
+	Une petite équipe sympathique présente pour vous aider et qui essaie de contribuer à l'évolution de vos connaissances dans le domaine de la programmation avec Qt et Python (PyQt et PySide principalement). Nous avons la vocation d'échange dans la simplicité et l'amitié, tout en respectant les consignes du site qui a la gentillesse d'héberger <a href="http://www.developpez.net/forums/f172/autres-langages/python-zope/gui/pyside-pyqt/">nos forums</a> et nos modestes moyens (tels que la <a href="http://pyqt.developpez.com/faq/">FAQ</a>, les <a href="http://pyt.developpez.com/tutoriels/">cours et tutoriels</a>, les <a href="http://qt-quarterly.developpez.com/">traductions des Qt Quarterly</a>, les <a href="http://qt-labs.developpez.com/">traductions des Qt Labs</a>, les <a href="http://qt-devnet.developpez.com/">traductions du Qt Developer Network</a>, les <a href="http://pyqt.developpez.com/livres/">critiques de livres</a>), témoins de notre volonté d'échange dans une ambiance de franche amitié.
+</p> 
+EOD;
+        
+        $sections['qt'] = new Section(); 
+        $sections['qt']->setName('Qt')
+                       ->setSlug('qt')
+                       ->setGabId(65)
+                       ->setImage('http://qt.developpez.com/images/equipe/logos/logo_equipe_qt.png')
+                       ->setText($qtText);
+        $em->persist($sections['qt']);
+        
+        $sections['pyqt'] = new Section(); 
+        $sections['pyqt']->setName('PyQt et PySide')
+                         ->setSlug('pyqt')
+                         ->setGabId(102)
+                         ->setImage('http://qt.developpez.com/images/equipe/logos/logo_equipe_qt_python.png')
+                         ->setText($pyqtText);
+        $em->persist($sections['pyqt']);
+        
+        return $sections; 
+    }
+    
+    private function importMembers(EntityManager $em, \PDO $dbh) {
+        $res = $dbh->query('SELECT * FROM `membre`');
+        
+        $members = array(); 
+        
+        while(($m = $res->fetch())) {
+            $member = new Member();
+            $member->setFamilyName(utf8_encode($m['nom']))
+                   ->setGivenName(utf8_encode($m['prenom']))
+                   ->setForumId((int) $m['id'])
+                   ->setPseudonym(utf8_encode($m['pseudo']))
+                   ->setEmail($m['email'])
+                   ->setShowEmail(true);
+            // $member->setPhoto(
+            
+            $em->persist($member);
+            $members[$m['id']] = $member; 
+        }
+        
+        return $members;
     }
 }

@@ -120,7 +120,7 @@ class Section
     {
         $this->slug = $slug;
     
-        return $slug;
+        return $this;
     }
 
     /**
@@ -143,7 +143,7 @@ class Section
     {
         $this->gabId = $gabId;
     
-        return $gabId;
+        return $this;
     }
 
     /**
@@ -166,7 +166,7 @@ class Section
     {
         $this->image = $image;
     
-        return $image;
+        return $this;
     }
 
     /**
@@ -189,7 +189,7 @@ class Section
     {
         $this->text = $text;
     
-        return $text;
+        return $this;
     }
 
     /**
