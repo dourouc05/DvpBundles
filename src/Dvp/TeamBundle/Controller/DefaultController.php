@@ -37,42 +37,7 @@ class DefaultController extends Controller {
     }
     
     // URL: /import/localhost/dvp/root/root
-    
-    /** Original dump **/
-/*--
--- Table structure for table `membre_site`
---
-
-CREATE TABLE IF NOT EXISTS `membre_site` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `url` text,
-  `name` text,
-  `membre` bigint(20) default NULL,
-  PRIMARY KEY  (`id`),
-  KEY `membre_idx` (`membre`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
-
---
--- Dumping data for table `membre_site`
---
-
-INSERT INTO `membre_site` (`id`, `url`, `name`, `membre`) VALUES
-(1, 'http://tcuvelier.developpez.com', 'Articles divers et variés', 254882),
-(2, 'http://blog.developpez.com/dourouc05/', 'Blog', 254882),
-(3, 'http://www.jcourtois.fr/', 'Site personnel', 44506),
-(4, 'http://jonathan-courtois.developpez.com/', 'Site personnel sur Developpez.com', 44506),
-(5, 'http://blog.developpez.com/jonathan.courtois/', 'Blog', 44506),
-(6, 'http://alp.developpez.com/', 'Articles', 67052),
-(7, 'http://yan-verdavaine.developpez.com/', 'Articles', 33090),
-(8, 'http://fhalgand.developpez.com/', 'Articles', 378458),
-(11, 'http://gbelz.developpez.com/', 'Site Web', 268393),
-(12, 'http://alexandre-laurent.developpez.com/', 'Site Web', 240267),
-(13, 'http://www.Ikipou.com/', 'Site Web', 57426),
-(14, 'http://blog.developpez.com/jiyuu', 'Blog', 135545),
-(15, 'http://ceg.developpez.com/', 'Site Web', 135545),
-(16, 'http://ymoreau.users.sourceforge.net ', 'Site Web', 72448);
-*/
-    // One-shot function. 
+    // One-shot functions. 
     public function importAction($dbHost, $dbDb, $dbUser, $dbPwd) {
         $dbh = new \PDO('mysql:host=' . $dbHost . ';dbname=' . $dbDb, $dbUser, $dbPwd);
         $em = $this->getDoctrine()->getManager(); 
@@ -86,7 +51,7 @@ INSERT INTO `membre_site` (`id`, `url`, `name`, `membre`) VALUES
         $this->mapMembersWithRoles($em, $dbh, $members, $roles);
         $this->importWebsites($em, $dbh, $members);
         
-        //$em->flush(); 
+        $em->flush(); 
     }
     
     private function importCertifications(EntityManager $em, \PDO $dbh) {
