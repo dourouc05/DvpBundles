@@ -346,7 +346,7 @@ EOD;
         return $categories; 
     }
     
-    private function importMembers(EntityManager $em, \PDO $dbh, array $sections) {
+    private function importMembers(EntityManager $em, \PDO $dbh, array $sections, array $categories) {
         $res = $dbh->query('SELECT * FROM `membre`');
         
         $members = array(); 
@@ -361,12 +361,22 @@ EOD;
                    ->setShowEmail(true)
                    ->addSection($sections['qt']);
             
-            if(file_exists($SERVER['DOCUMENT_ROOT'] . '/images/equipe/photos/' . utf8_encode($m['pseudo']) . '.jpg')) {
+            if(file_exists($_SERVER['DOCUMENT_ROOT'] . '/images/equipe/photos/' . utf8_encode($m['pseudo']) . '.jpg')) {
                 $member->setPhoto('http://qt.developpez.com/images/equipe/photos/' . utf8_encode($m['pseudo']) . '.jpg'); 
             }
             
             if((bool) $m['pyside']) {
                 $member->addSection($sections['pyqt']);
+            }
+            
+            if((bool) $m['resp']) {
+                $member->setCategory($categories[0]);
+            } elseif((bool) $m['redac']) {
+                $member->setCategory($categories[1]);
+            } elseif((bool) $m['ancien']) {
+                $member->setCategory($categories[2]);
+            } else {
+                $member->setCategory($categories[3]);
             }
             
             $em->persist($member);
