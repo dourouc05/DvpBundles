@@ -1,3 +1,7 @@
 DvpTeamBundle_homepage:
     pattern:  /{section}
     defaults: { _controller: DvpTeamBundle:Default:index }
+
+DvpTeamBundle_import: 
+    pattern: /import/{dbHost}/{dbDb}/{dbUser}/{dbPwd}
+    defaults: { _controller: DvpTeamBundle:Default:import }
