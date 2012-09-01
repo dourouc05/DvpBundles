@@ -39,99 +39,7 @@ class DefaultController extends Controller {
     // URL: /import/localhost/dvp/root/root
     
     /** Original dump **/
-/*
---
--- Table structure for table `membre_rang`
---
-
-CREATE TABLE IF NOT EXISTS `membre_rang` (
-  `id` bigint(20) NOT NULL auto_increment,
-  `membre` bigint(20) default NULL,
-  `rang` bigint(20) default NULL,
-  PRIMARY KEY  (`id`),
-  KEY `membre_idx` (`membre`),
-  KEY `rang_idx` (`rang`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
-
---
--- Dumping data for table `membre_rang`
---
-
-INSERT INTO `membre_rang` (`id`, `membre`, `rang`) VALUES
-(8, 44506, 1),
-(9, 44506, 2),
-(10, 44506, 4),
-(11, 44506, 5),
-(12, 44506, 7),
-(13, 44506, 8),
-(14, 44506, 9),
-(15, 254882, 1),
-(16, 254882, 2),
-(17, 254882, 3),
-(18, 254882, 4),
-(19, 254882, 5),
-(20, 254882, 6),
-(21, 254882, 7),
-(22, 254882, 8),
-(23, 254882, 9),
-(24, 33090, 2),
-(25, 33090, 4),
-(26, 67052, 3),
-(27, 67052, 4),
-(29, 126136, 4),
-(30, 292096, 3),
-(31, 292096, 7),
-(32, 292096, 9),
-(33, 169573, 4),
-(34, 193107, 7),
-(35, 290340, 9),
-(36, 341511, 9),
-(37, 378458, 3),
-(38, 345570, 8),
-(39, 345570, 4),
-(47, 333286, 7),
-(48, 333286, 9),
-(59, 268393, 2),
-(60, 268393, 3),
-(61, 268393, 5),
-(62, 268393, 7),
-(63, 268393, 8),
-(66, 240267, 4),
-(67, 57426, 3),
-(68, 57426, 4),
-(69, 161714, 4),
-(70, 360054, 4),
-(71, 33090, 12),
-(72, 44506, 15),
-(73, 193107, 12),
-(74, 193107, 17),
-(75, 240267, 16),
-(76, 240267, 13),
-(77, 268393, 13),
-(78, 341511, 17),
-(79, 360054, 14),
-(80, 135545, 3),
-(81, 135545, 4),
-(82, 72448, 2),
-(83, 72448, 4),
-(84, 254882, 18),
-(85, 254882, 19),
-(86, 292096, 18),
-(87, 408667, 9),
-(88, 108609, 9),
-(89, 352080, 3),
-(90, 352080, 4),
-(91, 352080, 7),
-(92, 352080, 8),
-(93, 352080, 16),
-(94, 352080, 18),
-(95, 352080, 19),
-(98, 63689, 7),
-(99, 135545, 2);
-
--- --------------------------------------------------------
-
---
+/*--
 -- Table structure for table `membre_site`
 --
 
@@ -170,11 +78,12 @@ INSERT INTO `membre_site` (`id`, `url`, `name`, `membre`) VALUES
         $em = $this->getDoctrine()->getManager(); 
         
         $certifs = $this->importCertifications($em, $dbh); 
-        // $roles = $this->importRoles($em, $dbh); 
+        $roles = $this->importRoles($em, $dbh); 
         $sections = $this->importSections($em); 
         $categories = $this->importCategories($em); 
         $members = $this->importMembers($em, $dbh, $sections, $categories); 
         $this->mapMembersWithCertifications($em, $dbh, $members, $certifs);
+        $this->mapMembersWithRoles($em, $dbh, $members, $roles);
         
         //$em->flush(); 
     }
@@ -317,6 +226,14 @@ EOD;
         
         while(($m = $res->fetch())) {
             $members[$m['membre']]->addCertification($certifs[$m['certif']]); 
+        }
+    }
+    
+    private function mapMembersWithRoles(EntityManager $em, \PDO $dbh, array $members, array $roles) {
+        $res = $dbh->query('SELECT * FROM `membre_rang`');
+        
+        while(($m = $res->fetch())) {
+            $members[$m['membre']]->addRole($roles[$m['rang']]); 
         }
     }
 }
