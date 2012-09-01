@@ -84,6 +84,7 @@ INSERT INTO `membre_site` (`id`, `url`, `name`, `membre`) VALUES
         $members = $this->importMembers($em, $dbh, $sections, $categories); 
         $this->mapMembersWithCertifications($em, $dbh, $members, $certifs);
         $this->mapMembersWithRoles($em, $dbh, $members, $roles);
+        $this->importWebsites($em, $dbh, $members);
         
         //$em->flush(); 
     }
@@ -234,6 +235,18 @@ EOD;
         
         while(($m = $res->fetch())) {
             $members[$m['membre']]->addRole($roles[$m['rang']]); 
+        }
+    }
+    
+    private function importWebsites(EntityManager $em, \PDO $dbh, array $members) {
+        $res = $dbh->query('SELECT * FROM `membre_site`');
+        
+        while(($m = $res->fetch())) {
+            $site = new Website(); 
+            $site->setName(utf8_encode($m['name']))
+                 ->setUrl($m['url']); 
+            $members[$m['membre']]->addWebsite($site);
+            $em->persist($site);
         }
     }
 }
