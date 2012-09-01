@@ -246,8 +246,9 @@ INSERT INTO `membre_site` (`id`, `url`, `name`, `membre`) VALUES
         
         // $certifs = $this->importCertifications($em, $dbh); 
         // $roles = $this->importRoles($em, $dbh); 
-        $sections = $this->importSections($em, $dbh); 
-        // $members = $this->importMembers($em, $dbh); 
+        $sections = $this->importSections($em); 
+        $categories = $this->importCategories($em); 
+        $members = $this->importMembers($em, $dbh, $sections, $categories); 
         
         $em->flush(); 
     }
@@ -286,7 +287,7 @@ INSERT INTO `membre_site` (`id`, `url`, `name`, `membre`) VALUES
         return $roles;
     }
     
-    private function importSections(EntityManager $em, \PDO $dbh) {
+    private function importSections(EntityManager $em) {
         $sections = array(); 
         
         $qtText = <<<EOD
@@ -319,7 +320,33 @@ EOD;
         return $sections; 
     }
     
-    private function importMembers(EntityManager $em, \PDO $dbh) {
+    private function importCategories(EntityManager $em) {
+        $categories = array(); 
+        
+        $categories[0] = new Category(); 
+        $categories[0]->setName('Responsables')
+                      ->setBold(true); 
+        $em->persist($categories[0]);
+        
+        $categories[1] = new Category(); 
+        $categories[1]->setName('Membres de la rédaction')
+                      ->setBold(false); 
+        $em->persist($categories[1]);
+        
+        $categories[2] = new Category(); 
+        $categories[2]->setName('Anciens membres de la rédaction')
+                      ->setBold(false); 
+        $em->persist($categories[2]);
+        
+        $categories[3] = new Category(); 
+        $categories[3]->setName('Hors rédaction')
+                      ->setBold(false); 
+        $em->persist($categories[3]);
+        
+        return $categories; 
+    }
+    
+    private function importMembers(EntityManager $em, \PDO $dbh, array $sections) {
         $res = $dbh->query('SELECT * FROM `membre`');
         
         $members = array(); 
@@ -331,8 +358,16 @@ EOD;
                    ->setForumId((int) $m['id'])
                    ->setPseudonym(utf8_encode($m['pseudo']))
                    ->setEmail($m['email'])
-                   ->setShowEmail(true);
-            // $member->setPhoto(
+                   ->setShowEmail(true)
+                   ->addSection($sections['qt']);
+            
+            if(file_exists($SERVER['DOCUMENT_ROOT'] . '/images/equipe/photos/' . utf8_encode($m['pseudo']) . '.jpg')) {
+                $member->setPhoto('http://qt.developpez.com/images/equipe/photos/' . utf8_encode($m['pseudo']) . '.jpg'); 
+            }
+            
+            if((bool) $m['pyside']) {
+                $member->addSection($sections['pyqt']);
+            }
             
             $em->persist($member);
             $members[$m['id']] = $member; 
