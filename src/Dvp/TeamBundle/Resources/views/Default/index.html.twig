@@ -13,8 +13,8 @@
         <link rel="stylesheet" type="text/css" media="screen" href="http://www.developpez.com/template/kit/article.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('bundles/dvpteam/index.css') }}" />
     </head>
-    <body xml:lang="fr" lang="fr">
-        {{ 65|gab_up }}
+    <body xml:lang="fr" lang="fr" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+        {{ 65|gab_up|gab_up_toHtml5 }}
         {% if section.rightColumn %}
 		<table>
 			<tr>
