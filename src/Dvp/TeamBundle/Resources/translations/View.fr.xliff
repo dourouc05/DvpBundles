@@ -24,15 +24,15 @@
             </trans-unit>
             <trans-unit id="title_roles">
                 <source>title_roles</source>
-                <target>{1}Rôle|]1, +Inf[Rôles</target>
+                <target>Rôle|Rôles</target>
             </trans-unit>
             <trans-unit id="title_websites">
                 <source>title_websites</source>
-                <target>{1}Site Web|]1, +Inf[Sites Web</target>
+                <target>Site Web|Sites Web</target>
             </trans-unit>
             <trans-unit id="title_certifications">
                 <source>title_certifications</source>
-                <target>{1}Certification|]1, +Inf[Certifications</target>
+                <target>Certification|Certifications</target>
             </trans-unit>
             <trans-unit id="send_pm">
                 <source>send_pm</source>
