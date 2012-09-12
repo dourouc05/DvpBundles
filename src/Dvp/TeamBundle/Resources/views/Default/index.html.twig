@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="fr" prefix="dc: http://purl.org/dc/elements/1.1/">
     <head>
         <title>L'équipe {{ section.name }} de Developpez.com</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,10 +22,12 @@
                         <img src="{{ section.image }}" alt="Logo"/>
                     </div>
                     <br/><br/><br/><br/><br/><br/>
-                    {{ section.text }}
+                    {{ section.text|raw }}
                     <p class="presentation" style="text-align:center; padding-top: 1px">
                         {% for category in categories %}
-                            {% include 'DvpTeamBundle:Default:headerList.html.twig' with {'category': category, 'section': section} only %}
+                            {% if category.getMembers(section) %}
+                                {% include 'DvpTeamBundle:Default:headerList.html.twig' with {'category': category, 'section': section} only %}
+                            {% endif %}
                         {% endfor %}
                     </p>
                 </div>
