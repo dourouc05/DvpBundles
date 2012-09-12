@@ -25,7 +25,7 @@
 				</span>
 			</p>
             
-            {% if member.roles %}
+            {% if member.roles|length > 0 %}
 			<p class="ligne">
 				<span class="legend">{{ "title_roles"|transchoice(member.roles|length, {}, 'View') }}</span>
 				<span class="ponctuation"> : </span>
@@ -52,7 +52,7 @@
 			</p>
             {% endif %}
             
-            {% if member.websites %}
+            {% if member.websites|length > 0 %}
 			<p class="ligne">
 				<span class="legend">{{ "title_websites"|transchoice(member.websites|length, {}, 'View') }}</span>
 				<span class="ponctuation"> : </span>
@@ -73,7 +73,7 @@
 			</p>
             {% endif %}
             
-            {% if member.certifications %}
+            {% if member.certifications|length > 0 %}
 			<p class="ligne">
 				<span class="legend">{{ "title_certifications"|transchoice(member.certifications|length, {}, 'View') }}</span>
 				<span class="ponctuation"> : </span>
