@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="fr" prefix="dc: http://purl.org/dc/elements/1.1/">
+<html prefix="dc: http://purl.org/dc/elements/1.1/">
     <head>
         <title>L'équipe {{ section.name }} de Developpez.com</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="http://www.developpez.com/template/kit/article.css" />
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('bundles/dvpteam/index.css') }}" />
     </head>
-    <body xml:lang="fr">
+    <body xml:lang="fr" lang="fr">
         {{ 65|gab_up }}
         {% if section.rightColumn %}
 		<table>
@@ -52,7 +52,7 @@
                     </div>
 				</td>
 				<td style="width: 300px; " valign="top">
-                    {{ section.rightColumn|php_include|convert_encoding('ISO-8859-1', 'UTF-8')|raw }}
+                    {{ section.rightColumn|gab_right_column|raw }}
 				</td>
 			</tr>
 		</table>
