@@ -57,6 +57,13 @@ class Section
      * @ORM\Column(type="text")
      */
     private $text;
+
+    /**
+     * @var string $rightColumn
+     *
+     * @ORM\Column(type="text")
+     */
+    private $rightColumn;
     
     /**
      * @var array $members
@@ -200,6 +207,29 @@ class Section
     public function getText()
     {
         return $this->text;
+    }
+
+    /**
+     * Set rightColumn
+     *
+     * @param string $rightColumn
+     * @return Section
+     */
+    public function setRightColumn($rightColumn)
+    {
+        $this->rightColumn = $rightColumn;
+    
+        return $this;
+    }
+
+    /**
+     * Get rightColumn
+     *
+     * @return string 
+     */
+    public function getRightColumn()
+    {
+        return $this->rightColumn;
     }
 
     /**

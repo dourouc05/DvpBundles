@@ -15,6 +15,13 @@
     </head>
     <body xml:lang="fr">
         {{ 65|gab_up }}
+        {% if section.rightColumn %}
+		<table>
+			<tr>
+				<td valign="top" style="width: 100%; ">
+                    <div class="divarticle">
+        {% endif %}
+        
         <div id="teamPage">
             <div id="container">
                 <div id="header">
@@ -40,6 +47,17 @@
                 </div>
             </div>
         </div>
+        
+        {% if section.rightColumn %}
+                    </div>
+				</td>
+				<td style="width: 300px; " valign="top">
+                    {{ section.rightColumn|php_include|convert_encoding('ISO-8859-1', 'UTF-8')|raw }}
+				</td>
+			</tr>
+		</table>
+        {% endif %}
+        
         {{ 65|gab_down(true) }}
     </body>
 </html>
