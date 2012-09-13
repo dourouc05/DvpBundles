@@ -1,0 +1,7 @@
+parameters:
+#    dvp_user.example.class: Dvp\UserBundle\Example
+
+services:
+#    dvp_user.example:
+#        class: %dvp_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

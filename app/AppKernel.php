@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             // new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\CacheBundle\SonataCacheBundle(),
             new Sonata\jQueryBundle\SonatajQueryBundle(),
@@ -30,6 +31,7 @@ class AppKernel extends Kernel
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new Dvp\TeamBundle\DvpTeamBundle(),
             new Dvp\GabaritBundle\DvpGabaritBundle(),
+            new Dvp\UserBundle\DvpUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

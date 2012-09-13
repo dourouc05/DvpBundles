@@ -88,3 +88,8 @@ sonata_admin:
             dvp_team: 
                 label: Équipe
                 items: ~
+
+fos_user:
+    db_driver: orm 
+    firewall_name: main
+    user_class: Dvp\UserBundle\Entity\User

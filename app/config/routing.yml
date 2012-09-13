@@ -1,12 +1,9 @@
-DvpTeamBundle:
-    resource: "@DvpTeamBundle/Resources/config/routing.yml"
-    prefix:   /
-
 # Internal routing configuration to handle ESI
 _internal:
     resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
     prefix:   /_internal
 
+# Sonata admin things
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /administration
@@ -16,6 +13,20 @@ _sonata_admin:
     type: sonata_admin
     prefix: /administration
 
+# Dvp bundles
 team: 
     resource: "@DvpTeamBundle/Resources/config/routing.yml"
     prefix: /equipe
+
+user:
+    resource: "@DvpUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+# Security
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+    prefix: /administration
+
+administration: 
+    pattern: /administration
+    defaults: { _controller: SonataAdminBundle:Core:dashboard }
